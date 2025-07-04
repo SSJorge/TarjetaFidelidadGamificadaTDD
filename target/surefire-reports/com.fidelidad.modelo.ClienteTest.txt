@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.fidelidad.modelo.ClienteTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.077 s -- in com.fidelidad.modelo.ClienteTest
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.068 s <<< FAILURE! -- in com.fidelidad.modelo.ClienteTest
+com.fidelidad.modelo.ClienteTest.setPuntos_actualizaPuntajeCorrectamente -- Time elapsed: 0.018 s <<< ERROR!
+java.lang.Error: 
+Unresolved compilation problem: 
+	The method setPuntos(int) is undefined for the type Cliente
+
+	at com.fidelidad.modelo.ClienteTest.setPuntos_actualizaPuntajeCorrectamente(ClienteTest.java:30)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
