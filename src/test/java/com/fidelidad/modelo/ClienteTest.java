@@ -15,10 +15,11 @@ public class ClienteTest {
         assertEquals(0, cliente.getPuntos());
         assertEquals(0, cliente.getStreakDias());
     }
+    @SuppressWarnings("ResultOfObjectAllocationIgnored")
     @Test
     void crearCliente_correoInvalido_lanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Cliente("C002", "Luis", "correo_invalido.com");
-        });
+        assertThrows(IllegalArgumentException.class, () -> 
+            new Cliente("C002", "Luis", "correo_invalido.com")
+        );
     }
 }
