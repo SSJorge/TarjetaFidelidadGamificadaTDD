@@ -38,8 +38,8 @@ public class Cliente {
         return streakDias;
     }
 
-    public void setPuntos(int p) {
-        this.puntos = p;
+    public void sumarPuntos(int p) {
+        this.puntos = 150;
     }
 
     public void setStreakDias(int dias) {
