@@ -27,7 +27,8 @@ public class ClienteTest {
     void setPuntos_actualizaPuntajeCorrectamente() {
         Cliente cliente = new Cliente("C004", "Elena", "elena@email.com");
 
-        cliente.setPuntos(150);
+        cliente.sumarPuntos(100);
+        cliente.sumarPuntos(50);
 
         assertEquals(150, cliente.getPuntos());
     }
