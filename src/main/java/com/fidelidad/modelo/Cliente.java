@@ -39,6 +39,6 @@ public class Cliente {
     }
 
     public void setPuntos(int p) {
-        this.puntos = 150;
+        this.puntos = p;
     }
 } 
