@@ -1,6 +1,7 @@
 package com.fidelidad.modelo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class ClienteTest {
@@ -13,5 +14,11 @@ public class ClienteTest {
         assertEquals("ana@email.com", cliente.getCorreo());
         assertEquals(0, cliente.getPuntos());
         assertEquals(0, cliente.getStreakDias());
+    }
+    @Test
+    void crearCliente_correoInvalido_lanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Cliente("C002", "Luis", "correo_invalido.com");
+        });
     }
 }
