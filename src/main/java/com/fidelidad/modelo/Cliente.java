@@ -37,4 +37,8 @@ public class Cliente {
     public int getStreakDias() {
         return streakDias;
     }
+
+    public void setPuntos(int p) {
+        this.puntos = 150;
+    }
 } 
