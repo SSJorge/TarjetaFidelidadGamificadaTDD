@@ -8,7 +8,7 @@ public class Cliente {
     private int streakDias;
 
     public Cliente(String id, String nombre, String correo) {
-        if (correo.equals("correo_invalido.com")) {
+        if (!correo.contains("@")) {
             throw new IllegalArgumentException("Correo inválido");
         }
         this.id = id;
