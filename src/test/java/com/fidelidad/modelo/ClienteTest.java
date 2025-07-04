@@ -31,4 +31,13 @@ public class ClienteTest {
 
         assertEquals(150, cliente.getPuntos());
     }
+
+    @Test
+    void setStreakDias_actualizaStreakDiasCorrectamente() {
+        Cliente cliente = new Cliente("C004", "Elena", "elena@email.com");
+
+        cliente.setStreakDias(2);
+
+        assertEquals(2, cliente.getStreakDias());
+    }
 }
