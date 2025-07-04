@@ -43,6 +43,6 @@ public class Cliente {
     }
 
     public void setStreakDias(int dias) {
-        this.streakDias = 2;
+        this.streakDias = dias;
     }
 } 
