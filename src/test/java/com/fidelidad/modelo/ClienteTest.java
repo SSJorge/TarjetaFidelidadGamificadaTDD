@@ -1,12 +1,12 @@
 package com.fidelidad.modelo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ClienteTest {
     @Test
     void crearCliente_valoresInicialesCorrectos() {
-        Cliente cliente = new Cliente("C001", "Ana", "ana@email.com");
+        Cliente cliente = new Cliente();
 
         assertEquals("C001", cliente.getId());
         assertEquals("Ana", cliente.getNombre());
