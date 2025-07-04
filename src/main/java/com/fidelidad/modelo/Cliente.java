@@ -41,4 +41,8 @@ public class Cliente {
     public void setPuntos(int p) {
         this.puntos = p;
     }
+
+    public void setStreakDias(int dias) {
+        this.streakDias = 2;
+    }
 } 
