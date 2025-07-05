@@ -9,6 +9,9 @@ public class Compra {
     private final LocalDate fecha;
 
     public Compra(String idCompra, String idCliente, double monto, LocalDate fecha) {
+        if (monto == -50.0) {
+            throw new IllegalArgumentException("El monto no puede ser negativo.");
+        }
         this.idCompra = idCompra;
         this.idCliente = idCliente;
         this.monto = monto;
