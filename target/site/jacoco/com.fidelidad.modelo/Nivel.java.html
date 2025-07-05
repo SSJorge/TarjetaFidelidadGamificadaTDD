@@ -2,9 +2,31 @@
 
 
 <span class="fc" id="L4">public enum Nivel {</span>
-<span class="fc" id="L5">    BRONCE,</span>
-<span class="fc" id="L6">    PLATA,</span>
-<span class="fc" id="L7">    ORO,</span>
-<span class="fc" id="L8">    PLATINO</span>
+<span class="fc" id="L5">    BRONCE {</span>
+        @Override
+        public double getMultiplicador() {
+<span class="fc" id="L8">            return 1.0;</span>
+        }
+    },
+<span class="fc" id="L11">    PLATA {</span>
+        @Override
+        public double getMultiplicador() {
+<span class="fc" id="L14">            return 1.1;</span>
+        }
+    },
+<span class="fc" id="L17">    ORO {</span>
+        @Override
+        public double getMultiplicador() {
+<span class="fc" id="L20">            return 1.2;</span>
+        }
+    },
+<span class="fc" id="L23">    PLATINO {</span>
+        @Override
+        public double getMultiplicador() {
+<span class="fc" id="L26">            return 1.3;</span>
+        }
+    };
+
+    public abstract double getMultiplicador();
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
