@@ -22,4 +22,11 @@ public class FechaUtilTest {
 
         assertEquals("Fecha inválida, use formato dd-MM-aaaa", ex.getMessage());
     }
+
+    @Test
+    void parsear_nullLanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            FechaUtil.parsear(null);
+        });
+    }
 }
