@@ -10,10 +10,13 @@ public class FechaUtil {
         .withResolverStyle(ResolverStyle.STRICT);
 
     public static LocalDate parsear(String fechaTexto) {
+        if (fechaTexto == null) {
+            throw new IllegalArgumentException("Fecha inválida, use formato dd-MM-aaaa");
+        }
         try {
             return LocalDate.parse(fechaTexto, FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Fecha inválida, use formato dd-MM-aaaa");
+            throw new IllegalArgumentException("Fecha inválida, use formato dd-MM-aaaa", e);
         }
     }
 }
