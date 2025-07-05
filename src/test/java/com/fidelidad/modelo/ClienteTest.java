@@ -41,4 +41,10 @@ public class ClienteTest {
 
         assertEquals(2, cliente.getStreakDias());
     }
+    @Test
+    void crearCliente_nivelInicialEsBronce() {
+        Cliente cliente = new Cliente("C003", "Mario", "mario@email.com");
+
+        assertEquals(Nivel.BRONCE, cliente.getNivel());
+    }
 }
