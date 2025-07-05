@@ -31,6 +31,13 @@ public class Cliente {
         this.correo = correo;
         this.puntos = puntos;
         this.streakDias = 0;
+        this.nivel = calcularNivel(puntos);
+    }
+    private Nivel calcularNivel(int puntos) {
+        if (puntos >= 3000) return Nivel.PLATINO;
+        if (puntos >= 1500) return Nivel.ORO;
+        if (puntos >= 500)  return Nivel.PLATA;
+        return Nivel.BRONCE;
     }
 
     public String getId() {
