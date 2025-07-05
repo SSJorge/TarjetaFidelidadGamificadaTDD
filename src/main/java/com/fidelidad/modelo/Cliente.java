@@ -45,4 +45,8 @@ public class Cliente {
     public void setStreakDias(int dias) {
         this.streakDias = dias;
     }
-} 
+
+    public Nivel getNivel() {
+        return Nivel.BRONCE;
+    }
+}   
