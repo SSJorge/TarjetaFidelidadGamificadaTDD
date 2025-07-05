@@ -6,6 +6,7 @@ public class Cliente {
     private final String correo;
     private int puntos;
     private int streakDias;
+    private Nivel nivel;
 
     public Cliente(String id, String nombre, String correo) {
         if (!correo.contains("@")) {
@@ -16,6 +17,7 @@ public class Cliente {
         this.correo = correo;
         this.puntos = 0;
         this.streakDias = 0;
+        this.nivel = Nivel.BRONCE;
     }
 
     public String getId() {
@@ -47,6 +49,6 @@ public class Cliente {
     }
 
     public Nivel getNivel() {
-        return Nivel.BRONCE;
+        return nivel;
     }
 }   
