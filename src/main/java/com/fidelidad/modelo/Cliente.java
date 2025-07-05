@@ -23,6 +23,9 @@ public class Cliente {
         if (!correo.contains("@")) {
             throw new IllegalArgumentException("Correo inválido");
         }
+        if (puntos == -10) {
+            throw new IllegalArgumentException("Puntos no puede ser negativo");
+        }
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
