@@ -46,6 +46,41 @@ public class ClienteTest {
             new Cliente("C002", "Luis", "luis@email.com", -10);
         });
     }
+    @Test
+    void crearCliente_conPuntos499_esBronce() {
+        Cliente cliente = new Cliente("C010", "Juan", "juan@email.com", 499);
+        assertEquals(Nivel.BRONCE, cliente.getNivel());
+    }
+
+    @Test
+    void crearCliente_conPuntos500_esPlata() {
+        Cliente cliente = new Cliente("C011", "Sofía", "sofia@email.com", 500);
+        assertEquals(Nivel.PLATA, cliente.getNivel());
+    }
+
+    @Test
+    void crearCliente_conPuntos1499_esPlata() {
+        Cliente cliente = new Cliente("C012", "Carlos", "carlos@email.com", 1499);
+        assertEquals(Nivel.PLATA, cliente.getNivel());
+    }
+
+    @Test
+    void crearCliente_conPuntos1500_esOro() {
+        Cliente cliente = new Cliente("C013", "Lucía", "lucia@email.com", 1500);
+        assertEquals(Nivel.ORO, cliente.getNivel());
+    }
+
+    @Test
+    void crearCliente_conPuntos2999_esOro() {
+        Cliente cliente = new Cliente("C014", "Pedro", "pedro@email.com", 2999);
+        assertEquals(Nivel.ORO, cliente.getNivel());
+    }
+
+    @Test
+    void crearCliente_conPuntos3000_esPlatino() {
+        Cliente cliente = new Cliente("C015", "Laura", "laura@email.com", 3000);
+        assertEquals(Nivel.PLATINO, cliente.getNivel());
+    }
 
     @Test
     void setPuntos_actualizaPuntajeCorrectamente() {
