@@ -61,6 +61,9 @@ public class Cliente {
     }
 
     public void sumarPuntos(int puntosASumar) {
+        if (puntosASumar < 0) {
+            throw new IllegalArgumentException("No se pueden sumar puntos negativos");
+        }
         this.puntos += puntosASumar;
         this.nivel = calcularNivel(this.puntos);
     }
@@ -71,9 +74,5 @@ public class Cliente {
 
     public Nivel getNivel() {
         return nivel;
-    }
-
-    public void setNivel(Nivel nivel) {
-        this.nivel = nivel;
     }
 }   
