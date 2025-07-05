@@ -62,6 +62,7 @@ public class Cliente {
 
     public void sumarPuntos(int puntosASumar) {
         this.puntos += puntosASumar;
+        this.nivel = calcularNivel(this.puntos);
     }
 
     public void setStreakDias(int dias) {
