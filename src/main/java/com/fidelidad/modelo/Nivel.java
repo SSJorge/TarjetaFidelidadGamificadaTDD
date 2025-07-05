@@ -2,30 +2,15 @@ package com.fidelidad.modelo;
 
 
 public enum Nivel {
-    BRONCE {
-        @Override
-        public double getMultiplicador() {
-            return 1.0;
-        }
-    },
-    PLATA {
-        @Override
-        public double getMultiplicador() {
-            return 1.1;
-        }
-    },
-    ORO {
-        @Override
-        public double getMultiplicador() {
-            return 1.2;
-        }
-    },
-    PLATINO {
-        @Override
-        public double getMultiplicador() {
-            return 1.3;
-        }
-    };
+    BRONCE(1.0), PLATA(1.2), ORO(1.5), PLATINO(2.0);
 
-    public abstract double getMultiplicador();
+    private final double multiplicador;
+
+    Nivel(double multiplicador) {
+        this.multiplicador = multiplicador;
+    }
+
+    public double getMultiplicador() {
+        return multiplicador;
+    }
 }

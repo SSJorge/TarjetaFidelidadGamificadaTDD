@@ -1,6 +1,7 @@
 package com.fidelidad.modelo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class NivelTest {
@@ -17,8 +18,8 @@ public class NivelTest {
     @Test
         void nivel_getMultiplicador_devuelveValorEsperado() {
             assertEquals(1.0, Nivel.BRONCE.getMultiplicador());
-            assertEquals(1.1, Nivel.PLATA.getMultiplicador());
-            assertEquals(1.2, Nivel.ORO.getMultiplicador());
-            assertEquals(1.3, Nivel.PLATINO.getMultiplicador());
+            assertEquals(1.2, Nivel.PLATA.getMultiplicador());
+            assertEquals(1.5, Nivel.ORO.getMultiplicador());
+            assertEquals(2.0, Nivel.PLATINO.getMultiplicador());
         }
 }
