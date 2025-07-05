@@ -1,9 +1,12 @@
 package com.fidelidad.util;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class FechaUtilTest {
@@ -28,5 +31,15 @@ public class FechaUtilTest {
         assertThrows(IllegalArgumentException.class, () -> {
             FechaUtil.parsear(null);
         });
+    }
+
+    @Test
+    void constructor_privado_lanzaAssertionError() throws Exception {
+        Constructor<FechaUtil> constructor = FechaUtil.class.getDeclaredConstructor();
+        constructor.setAccessible(true);
+
+        InvocationTargetException ex = assertThrows(InvocationTargetException.class, constructor::newInstance);
+        assertTrue(ex.getCause() instanceof AssertionError);
+        assertEquals("No se debe instanciar FechaUtil", ex.getCause().getMessage());
     }
 }

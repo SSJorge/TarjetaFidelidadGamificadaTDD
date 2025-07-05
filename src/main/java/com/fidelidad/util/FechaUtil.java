@@ -9,6 +9,10 @@ public class FechaUtil {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu")
         .withResolverStyle(ResolverStyle.STRICT);
 
+    private FechaUtil() {
+        throw new AssertionError("No se debe instanciar FechaUtil");
+    }
+
     public static LocalDate parsear(String fechaTexto) {
         if (fechaTexto == null) {
             throw new IllegalArgumentException("Fecha inválida, use formato dd-MM-aaaa");
