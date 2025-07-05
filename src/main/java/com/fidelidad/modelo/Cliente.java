@@ -53,6 +53,6 @@ public class Cliente {
     }
 
     public void setNivel(Nivel nivel) {
-        this.nivel = Nivel.ORO;
+        this.nivel = nivel;
     }
 }   
