@@ -36,7 +36,7 @@ public class ClienteTest {
     @Test
     void crearClienteConPuntos_correoInvalido_lanzaExcepcion() {
         assertThrows(IllegalArgumentException.class, () -> 
-            new Cliente("C002", "Luis", "correo_invalido.com")
+            new Cliente("C002", "Luis", "correo_invalido.com", 5000)
         );
     }
 
