@@ -26,9 +26,8 @@ public class Cliente {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
-        this.puntos = 1000;
+        this.puntos = puntos;
         this.streakDias = 0;
-        this.nivel = Nivel.BRONCE;
     }
 
     public String getId() {
