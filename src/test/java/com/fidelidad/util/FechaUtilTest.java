@@ -21,4 +21,13 @@ public class FechaUtilTest {
             FechaUtil.parsear("2023/10/01");
         });
     }
+
+    @Test
+    void parsear_fechaInvalida_lanzaExcepcionConMensajePersonalizado() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            FechaUtil.parsear("2023/10/01");
+        });
+
+        assertEquals("Fecha inválida, use formato dd-MM-aa", ex.getMessage());
+    }
 }
