@@ -51,4 +51,8 @@ public class Cliente {
     public Nivel getNivel() {
         return nivel;
     }
+
+    public void setNivel(Nivel nivel) {
+        this.nivel = Nivel.ORO;
+    }
 }   
