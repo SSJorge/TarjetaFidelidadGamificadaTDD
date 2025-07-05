@@ -83,6 +83,27 @@ public class ClienteTest {
     }
 
     @Test
+    void sumarPuntos_cruzaUmbral500_actualizaNivelAPlata() {
+        Cliente cliente = new Cliente("C016", "Mario", "mario@email.com", 499);
+        cliente.sumarPuntos(1);
+        assertEquals(Nivel.PLATA, cliente.getNivel());
+    }
+
+    @Test
+    void sumarPuntos_cruzaUmbral1500_actualizaNivelAOro() {
+        Cliente cliente = new Cliente("C017", "Julia", "julia@email.com", 1490);
+        cliente.sumarPuntos(10);
+        assertEquals(Nivel.ORO, cliente.getNivel());
+    }
+
+    @Test
+    void sumarPuntos_cruzaUmbral3000_actualizaNivelAPlatino() {
+        Cliente cliente = new Cliente("C018", "Tomas", "tomas@email.com", 2990);
+        cliente.sumarPuntos(10);
+        assertEquals(Nivel.PLATINO, cliente.getNivel());
+    }
+
+    @Test
     void setPuntos_actualizaPuntajeCorrectamente() {
         Cliente cliente = new Cliente("C004", "Elena", "elena@email.com");
 
