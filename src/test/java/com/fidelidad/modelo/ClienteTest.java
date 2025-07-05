@@ -41,6 +41,13 @@ public class ClienteTest {
     }
 
     @Test
+    void crearCliente_conPuntosNegativos_lanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Cliente("C002", "Luis", "luis@email.com", -10);
+        });
+    }
+
+    @Test
     void setPuntos_actualizaPuntajeCorrectamente() {
         Cliente cliente = new Cliente("C004", "Elena", "elena@email.com");
 
