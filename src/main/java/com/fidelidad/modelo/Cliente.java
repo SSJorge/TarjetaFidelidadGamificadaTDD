@@ -19,6 +19,17 @@ public class Cliente {
         this.streakDias = 0;
         this.nivel = Nivel.BRONCE;
     }
+    public Cliente(String id, String nombre, String correo, int puntos) {
+        if (!correo.contains("@")) {
+            throw new IllegalArgumentException("Correo inválido");
+        }
+        this.id = id;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.puntos = 0;
+        this.streakDias = 0;
+        this.nivel = Nivel.BRONCE;
+    }
 
     public String getId() {
         return id;
