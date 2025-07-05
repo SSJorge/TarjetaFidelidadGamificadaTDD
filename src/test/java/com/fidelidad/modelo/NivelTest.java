@@ -13,4 +13,12 @@ public class NivelTest {
             niveles
         );
     }
+
+    @Test
+        void nivel_getMultiplicador_devuelveValorEsperado() {
+            assertEquals(1.0, Nivel.BRONCE.getMultiplicador());
+            assertEquals(1.1, Nivel.PLATA.getMultiplicador());
+            assertEquals(1.2, Nivel.ORO.getMultiplicador());
+            assertEquals(1.3, Nivel.PLATINO.getMultiplicador());
+        }
 }
