@@ -47,4 +47,12 @@ public class ClienteTest {
 
         assertEquals(Nivel.BRONCE, cliente.getNivel());
     }
+    @Test
+    void setNivel_actualizaNivelCorrectamente() {
+        Cliente cliente = new Cliente("C005", "Lucía", "lucia@email.com");
+
+        cliente.setNivel(Nivel.ORO);
+
+        assertEquals(Nivel.ORO, cliente.getNivel());
+    }
 }
