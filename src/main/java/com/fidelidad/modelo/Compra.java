@@ -1,19 +1,32 @@
 package com.fidelidad.modelo;
 
+import java.time.LocalDate;
+
 public class Compra {
+    private final String idCompra;
+    private final String idCliente;
+    private final double monto;
+    private final LocalDate fecha;
+
+    public Compra(String idCompra, String idCliente, double monto, LocalDate fecha) {
+        this.idCompra = idCompra;
+        this.idCliente = idCliente;
+        this.monto = monto;
+        this.fecha = fecha;
+    }
     public String getIdCompra() {
-        return "B001";
+        return idCompra;
     }
 
     public String getIdCliente() {
-        return "C001";
+        return idCliente;
     }
 
-    public Double getMonto() {
-        return 100.0;
+    public double getMonto() {
+        return monto;
     }
 
-    public String getFecha() {
-        return "2023-10-01";
+    public LocalDate getFecha() {
+        return fecha;
     }
 } 
