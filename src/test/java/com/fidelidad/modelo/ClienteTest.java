@@ -135,4 +135,24 @@ public class ClienteTest {
 
         assertEquals(Nivel.BRONCE, cliente.getNivel());
     }
-}
+    @Test
+    void crearCliente_idNulo_lanzaExcepcion() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
+            new Cliente(null, "Ana", "ana@email.com")
+        );
+        assertEquals("ID no puede ser vacío", thrown.getMessage());
+    }
+    void crearCliente_idVacio_lanzaExcepcion() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
+            new Cliente("", "Ana", "ana@email.com")
+        );
+        assertEquals("ID no puede ser vacío", thrown.getMessage());
+    }
+    // @Test
+    // void crearCliente_nombreVacio_lanzaExcepcion() {
+    //     IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
+    //         new Cliente("C020", "", "ana@email.com")
+    //     );
+    //     assertEquals("Nombre no puede ser vacío", thrown.getMessage());
+    // }
+    }
