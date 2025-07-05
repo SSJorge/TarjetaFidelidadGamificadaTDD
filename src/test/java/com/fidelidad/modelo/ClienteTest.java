@@ -15,6 +15,16 @@ public class ClienteTest {
         assertEquals(0, cliente.getPuntos());
         assertEquals(0, cliente.getStreakDias());
     }
+    @Test
+    void crearClienteConPuntos_valoresInicialesCorrectos() {
+        Cliente cliente = new Cliente("C001", "Ana", "ana@email.com", 1000);
+
+        assertEquals("C001", cliente.getId());
+        assertEquals("Ana", cliente.getNombre());
+        assertEquals("ana@email.com", cliente.getCorreo());
+        assertEquals(1000, cliente.getPuntos());
+        assertEquals(0, cliente.getStreakDias());
+    }
 
     @Test
     void crearCliente_correoInvalido_lanzaExcepcion() {
