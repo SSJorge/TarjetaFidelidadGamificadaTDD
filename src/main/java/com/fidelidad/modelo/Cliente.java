@@ -26,7 +26,7 @@ public class Cliente {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
-        this.puntos = 0;
+        this.puntos = 1000;
         this.streakDias = 0;
         this.nivel = Nivel.BRONCE;
     }
