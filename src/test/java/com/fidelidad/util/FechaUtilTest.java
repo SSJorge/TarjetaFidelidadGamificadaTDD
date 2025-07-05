@@ -11,3 +11,4 @@ public class FechaUtilTest {
         LocalDate fecha = FechaUtil.parsear("01-10-23");
         assertEquals(LocalDate.of(2023, 10, 1), fecha);
     }
+}
