@@ -34,6 +34,13 @@ public class ClienteTest {
     }
 
     @Test
+    void crearClienteConPuntos_correoInvalido_lanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> 
+            new Cliente("C002", "Luis", "correo_invalido.com")
+        );
+    }
+
+    @Test
     void setPuntos_actualizaPuntajeCorrectamente() {
         Cliente cliente = new Cliente("C004", "Elena", "elena@email.com");
 
