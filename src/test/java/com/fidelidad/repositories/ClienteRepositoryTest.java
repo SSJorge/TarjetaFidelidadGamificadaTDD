@@ -72,16 +72,17 @@ public class ClienteRepositoryTest {
     }
 
     @Test
-    void actualizar_clienteExistente_modificaDatos() {
-        repo.agregar(cliente);
-        Cliente actualizado = new Cliente("C001", "Ana María", "ana.maria@email.com", 2000);
+    void actualizar_clienteExistenteConMismoId_actualizaDatos() {
+        Cliente original = new Cliente("C001", "Ana", "ana@email.com", 500);
+        repo.agregar(original);
 
-        repo.actualizar(actualizado);
-        Cliente obtenido = repo.obtener("C001");
+        Cliente actualizado = new Cliente("C001", "Ana María", "ana.maria@email.com", 1000);
+        repo.actualizar("C001", actualizado);
 
-        assertEquals("Ana María", obtenido.getNombre());
-        assertEquals("ana.maria@email.com", obtenido.getCorreo());
-        assertEquals(Nivel.ORO, obtenido.getNivel());
+        Cliente resultado = repo.obtener("C001");
+        assertEquals("Ana María", resultado.getNombre());
+        assertEquals("ana.maria@email.com", resultado.getCorreo());
+        assertEquals(1000, resultado.getPuntos());
     }
 
     

@@ -27,4 +27,7 @@ public class ClienteRepository {
         }
         clientes.remove(id);
     }
+    public void actualizar(Cliente cliente) {
+        clientes.put(cliente.getId(), cliente);
+    }
 }
