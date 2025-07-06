@@ -2,6 +2,7 @@ package com.fidelidad.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import com.fidelidad.modelo.Compra;
@@ -28,6 +29,6 @@ public class CompraRepository {
                 return "Compra eliminada: " + idCompra;
             }
         }
-        return "Compra no encontrada: " + idCompra;
+        throw new NoSuchElementException("Compra no encontrada: " + idCompra);
     }
 }
