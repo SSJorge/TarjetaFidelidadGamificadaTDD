@@ -23,6 +23,7 @@ public class CompraRepositoryTest {
         repo = new CompraRepository();
     }
 
+    //AGREGAR
     @Test
     void agregar_compraSeAgregaCorrectamente() {
         LocalDate fecha = LocalDate.of(2023, 9, 15);
@@ -38,26 +39,22 @@ public class CompraRepositoryTest {
         assertEquals(fecha, comprasInternas.get(0).getFecha());
     }
     @Test
-    void listar_devuelveTodasLasComprasAgregadas() {
-        Compra c1 = new Compra("B001", "C001", 80.0, LocalDate.of(2023, 8, 10));
-        Compra c2 = new Compra("B002", "C002", 150.0, LocalDate.of(2023, 8, 12));
+    void agregar_compraConIdDuplicado_lanzaExcepcion() {
+        Compra original = new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1));
+        Compra duplicada = new Compra("B001", "C002", 150.0, LocalDate.of(2023, 10, 2));
 
-        repo.agregar(c1);
-        repo.agregar(c2);
+        repo.agregar(original);
 
-        List<Compra> lista = repo.listar();
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+            repo.agregar(duplicada)
+        );
 
-        assertEquals(2, lista.size());
-        assertTrue(lista.stream().anyMatch(c -> c.getIdCompra().equals("B001")));
-        assertTrue(lista.stream().anyMatch(c -> c.getIdCompra().equals("B002")));
-    }
-    @Test
-    void listar_sinCompras_devuelveListaVacia() {
-        List<Compra> compras = repo.listar();
-        assertNotNull(compras);
-        assertTrue(compras.isEmpty());
+        assertEquals("Ya existe una compra con ID: B001", ex.getMessage());
     }
 
+
+
+    //OBTENER POR CLIENTE
     @Test
     void obtenerPorCliente_devuelveComprasDeCliente() {
         Compra c1 = new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1));
@@ -82,6 +79,10 @@ public class CompraRepositoryTest {
         assertNotNull(comprasC999);
         assertTrue(comprasC999.isEmpty());
     }
+
+
+
+    //ELIMINAR
     @Test
     void eliminar_compraExistente_laElimina() {
         Compra compra = new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1));
@@ -116,6 +117,30 @@ public class CompraRepositoryTest {
         List<Compra> restantes = repo.listar();
         assertEquals(1, restantes.size());
         assertEquals("C002", restantes.get(0).getIdCliente());
+    }
+
+
+
+    //LISTAR
+    @Test
+    void listar_devuelveTodasLasComprasAgregadas() {
+        Compra c1 = new Compra("B001", "C001", 80.0, LocalDate.of(2023, 8, 10));
+        Compra c2 = new Compra("B002", "C002", 150.0, LocalDate.of(2023, 8, 12));
+
+        repo.agregar(c1);
+        repo.agregar(c2);
+
+        List<Compra> lista = repo.listar();
+
+        assertEquals(2, lista.size());
+        assertTrue(lista.stream().anyMatch(c -> c.getIdCompra().equals("B001")));
+        assertTrue(lista.stream().anyMatch(c -> c.getIdCompra().equals("B002")));
+    }
+    @Test
+    void listar_sinCompras_devuelveListaVacia() {
+        List<Compra> compras = repo.listar();
+        assertNotNull(compras);
+        assertTrue(compras.isEmpty());
     }
     @Test
     void listarPorFecha_devuelveSoloComprasEnEsaFecha() {
@@ -183,18 +208,4 @@ public class CompraRepositoryTest {
         assertNotNull(resultado);
         assertTrue(resultado.isEmpty());
     }
-
-    @Test
-    void agregar_compraConIdDuplicado_lanzaExcepcion() {
-        Compra original = new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1));
-        Compra duplicada = new Compra("B001", "C002", 150.0, LocalDate.of(2023, 10, 2));
-
-        repo.agregar(original);
-
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
-            repo.agregar(duplicada)
-        );
-
-        assertEquals("Ya existe una compra con ID: B001", ex.getMessage());
 }
-    }
