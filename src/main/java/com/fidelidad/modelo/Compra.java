@@ -15,7 +15,7 @@ public class Compra {
         if (idCompra == null || idCompra.isBlank()) {
             throw new IllegalArgumentException("ID de compra no puede ser vacío");
         }
-        if (idCliente == null) {
+        if (idCliente == null || idCliente.isBlank()) {
             throw new IllegalArgumentException("ID de cliente no puede ser vacío");
         }
         this.idCompra = idCompra;
