@@ -33,4 +33,11 @@ public class CompraTest {
         );
         assertEquals("ID de compra no puede ser vacío", thrown.getMessage());
     }
+    @Test
+    void crearCompra_idCompraVacio_lanzaExcepcion() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
+            new Compra("   ", "C001", 100.0, LocalDate.now())
+        );
+        assertEquals("ID de compra no puede ser vacío", thrown.getMessage());
+    }
     }
