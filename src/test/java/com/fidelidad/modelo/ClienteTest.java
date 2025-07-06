@@ -171,11 +171,18 @@ public class ClienteTest {
         );
         assertEquals("Correo inválido", ex.getMessage());
     }
-    // @Test
-    // void crearCliente_nombreVacio_lanzaExcepcion() {
-    //     IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
-    //         new Cliente("C020", "", "ana@email.com")
-    //     );
-    //     assertEquals("Nombre no puede ser vacío", thrown.getMessage());
-    // }
+    @Test
+    void crearCliente_nombreVacio_lanzaExcepcion() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
+            new Cliente("C020", "", "ana@email.com")
+        );
+        assertEquals("Nombre no puede ser vacío", thrown.getMessage());
+    }
+    @Test
+    void crearCliente_nombreNulo_lanzaExcepcion() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
+            new Cliente("C020", null, "ana@email.com")
+        );
+        assertEquals("Nombre no puede ser vacío", thrown.getMessage());
+    }
     }
