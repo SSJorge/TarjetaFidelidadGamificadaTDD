@@ -75,7 +75,7 @@ public class Cliente {
         this.streakDias = dias;
     }
     public void sumarDia() {
-        this.streakDias=2;
+        this.streakDias++;
     }
 
     public Nivel getNivel() {
