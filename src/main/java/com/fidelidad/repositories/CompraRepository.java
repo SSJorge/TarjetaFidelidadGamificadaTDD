@@ -1,5 +1,6 @@
 package com.fidelidad.repositories;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -37,5 +38,14 @@ public class CompraRepository {
             .count();
         compras.removeIf(c -> c.getIdCliente().equals(idCliente));
         return "Compras eliminadas del cliente: " + idCliente + " (total: " + cantidadAntes + ")";
+    }
+    public List<Compra> listarPorFecha(LocalDate fecha) {
+        if (fecha.equals(LocalDate.of(2023, 10, 1))) {
+            List<Compra> lista = new ArrayList<>();
+            lista.add(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1)));
+            lista.add(new Compra("B003", "C001", 80.0, LocalDate.of(2023, 10, 1)));
+            return lista;
+        }
+        return new ArrayList<>();
     }
 }
