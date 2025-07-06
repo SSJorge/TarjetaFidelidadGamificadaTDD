@@ -21,7 +21,13 @@ public class CompraRepository {
             .collect(Collectors.toList());
     }
     public String eliminar(String idCompra) {
-        compras.clear();
-        return "Compra eliminada: " + idCompra;
+        for (int i = 0; i < compras.size(); i++) {
+            Compra c = compras.get(i);
+            if (c.getIdCompra().equals(idCompra)) {
+                compras.remove(i);
+                return "Compra eliminada: " + idCompra;
+            }
+        }
+        return "Compra no encontrada: " + idCompra;
     }
 }
