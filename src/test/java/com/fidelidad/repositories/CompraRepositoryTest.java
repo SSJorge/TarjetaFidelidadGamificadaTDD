@@ -183,4 +183,18 @@ public class CompraRepositoryTest {
         assertNotNull(resultado);
         assertTrue(resultado.isEmpty());
     }
+
+    @Test
+    void agregar_compraConIdDuplicado_lanzaExcepcion() {
+        Compra original = new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1));
+        Compra duplicada = new Compra("B001", "C002", 150.0, LocalDate.of(2023, 10, 2));
+
+        repo.agregar(original);
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+            repo.agregar(duplicada)
+        );
+
+        assertEquals("Ya existe una compra con ID: B001", ex.getMessage());
+}
     }
