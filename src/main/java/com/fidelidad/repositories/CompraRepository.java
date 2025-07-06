@@ -20,4 +20,8 @@ public class CompraRepository {
             .filter(c -> c.getIdCliente().equals(idCliente))
             .collect(Collectors.toList());
     }
+    public String eliminar(String idCompra) {
+        compras.clear();
+        return "Compra eliminada: " + idCompra;
+    }
 }

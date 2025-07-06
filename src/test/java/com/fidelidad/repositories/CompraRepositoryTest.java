@@ -85,8 +85,8 @@ public class CompraRepositoryTest {
         Compra compra = new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1));
         repo.agregar(compra);
 
-        boolean eliminado = repo.eliminar("B001");
-        assertTrue(eliminado);
+        String mensaje = repo.eliminar("B001");
+        assertEquals(mensaje, "Compra eliminada: " + compra.getIdCompra());
 
         List<Compra> compras = repo.listar();
         assertTrue(compras.isEmpty());
