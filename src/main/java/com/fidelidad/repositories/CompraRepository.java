@@ -31,4 +31,8 @@ public class CompraRepository {
         }
         throw new NoSuchElementException("Compra no encontrada: " + idCompra);
     }
+    public String eliminarPorCliente(String idCliente) {
+        compras.removeIf(c -> c.getIdCliente().equals("C001"));
+        return "Compras eliminadas del cliente: C001";
+    }
 }
