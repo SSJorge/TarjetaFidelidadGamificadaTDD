@@ -12,7 +12,7 @@ public class Compra {
         if (monto < 0) {
             throw new IllegalArgumentException("El monto no puede ser negativo.");
         }
-        if (idCompra == null) {
+        if (idCompra == null || idCompra.isBlank()) {
             throw new IllegalArgumentException("ID de compra no puede ser vacío");
         }
         this.idCompra = idCompra;
