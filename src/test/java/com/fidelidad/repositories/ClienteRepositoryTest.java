@@ -3,6 +3,10 @@ package com.fidelidad.repositories;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +39,18 @@ public class ClienteRepositoryTest {
     void obtener_clienteInexistente_retornaNull() {
         Cliente obtenido = repo.obtener("C999");
         assertNull(obtenido);
+    }
+
+    @Test
+    void listar_devuelveTodosLosClientes() {
+        Cliente otro = new Cliente("C002", "Luis", "luis@email.com", 200);
+        repo.agregar(cliente);
+        repo.agregar(otro);
+
+        List<Cliente> lista = repo.listar();
+        assertEquals(2, lista.size());
+        assertTrue(lista.contains(cliente));
+        assertTrue(lista.contains(otro));
     }
 
     
