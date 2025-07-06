@@ -103,4 +103,18 @@ public class CompraRepositoryTest {
 
         assertEquals("Compra no encontrada: " + idInexistente, ex.getMessage());
     }
+    @Test
+    void eliminarPorCliente_eliminaTodasLasComprasDelCliente() {
+        repo.agregar(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1)));
+        repo.agregar(new Compra("B002", "C001", 150.0, LocalDate.of(2023, 10, 2)));
+        repo.agregar(new Compra("B003", "C002", 80.0, LocalDate.of(2023, 10, 3)));
+
+        String resultado = repo.eliminarPorCliente("C001");
+
+        assertEquals("Compras eliminadas del cliente: C001", resultado);
+
+        List<Compra> restantes = repo.listar();
+        assertEquals(1, restantes.size());
+        assertEquals("C002", restantes.get(0).getIdCliente());
+    }
 }
