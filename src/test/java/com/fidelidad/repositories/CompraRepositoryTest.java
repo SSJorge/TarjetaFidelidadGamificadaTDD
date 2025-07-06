@@ -146,7 +146,7 @@ public class CompraRepositoryTest {
         ));
     }
     @Test
-    void listarPorAño_devuelveSoloComprasDelAño() {
+    void listarPorAnio_devuelveSoloComprasDelAnio() {
         repo.agregar(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 1, 10)));
         repo.agregar(new Compra("B002", "C002", 150.0, LocalDate.of(2023, 5, 20)));
         repo.agregar(new Compra("B003", "C003", 200.0, LocalDate.of(2024, 3, 15)));
