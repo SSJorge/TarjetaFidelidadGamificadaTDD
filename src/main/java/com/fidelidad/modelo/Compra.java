@@ -18,6 +18,9 @@ public class Compra {
         if (idCliente == null || idCliente.isBlank()) {
             throw new IllegalArgumentException("ID de cliente no puede ser vacío");
         }
+        if (fecha == null) {
+            throw new IllegalArgumentException("Fecha no puede ser nula");
+        }
         this.idCompra = idCompra;
         this.idCliente = idCliente;
         this.monto = monto;
