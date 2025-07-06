@@ -136,7 +136,7 @@ public class CompraRepositoryTest {
     void listarPorMes_devuelveSoloComprasDelMesYAnio() {
         repo.agregar(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1)));
         repo.agregar(new Compra("B002", "C002", 150.0, LocalDate.of(2023, 10, 15)));
-        repo.agregar(new Compra("B003", "C003", 200.0, LocalDate.of(2023, 11, 1)));
+        repo.agregar(new Compra("B003", "C003", 200.0, LocalDate.of(2024, 11, 1)));
 
         List<Compra> resultado = repo.listarPorMes(2023, 10);
 
