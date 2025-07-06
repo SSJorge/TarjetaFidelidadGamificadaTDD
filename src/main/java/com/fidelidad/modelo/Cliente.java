@@ -9,9 +9,10 @@ public class Cliente {
     private Nivel nivel;
 
     public Cliente(String id, String nombre, String correo) {
-        if (!correo.contains("@")) {
-            throw new IllegalArgumentException("Correo inválido");
-        }
+        // if (!correo.contains("@")) {
+        //     throw new IllegalArgumentException("Correo inválido");
+        // }
+        validarDatos(id, nombre, correo);
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
@@ -38,6 +39,13 @@ public class Cliente {
         if (puntos >= 1500) return Nivel.ORO;
         if (puntos >= 500)  return Nivel.PLATA;
         return Nivel.BRONCE;
+    }
+    private void validarDatos(String id, String nombre, String correo) {
+        if (id == null || id.isBlank()) throw new IllegalArgumentException("ID no puede ser vacío");
+        // if (nombre == null || nombre.isBlank()) throw new IllegalArgumentException("Nombre no puede ser vacío");
+        if (correo == null || correo.isBlank() || !correo.contains("@")) {
+            throw new IllegalArgumentException("Correo inválido");
+        }
     }
 
     public String getId() {

@@ -26,12 +26,12 @@ public class ClienteTest {
         assertEquals(0, cliente.getStreakDias());
     }
 
-    @Test
-    void crearCliente_correoInvalido_lanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> 
-            new Cliente("C002", "Luis", "correo_invalido.com")
-        );
-    }
+    // @Test
+    // void crearCliente_correoInvalido_lanzaExcepcion() {
+    //     assertThrows(IllegalArgumentException.class, () -> 
+    //         new Cliente("C002", "Luis", "correo_invalido.com")
+    //     );
+    // }
 
     @Test
     void crearClienteConPuntos_correoInvalido_lanzaExcepcion() {
@@ -147,6 +147,29 @@ public class ClienteTest {
             new Cliente("", "Ana", "ana@email.com")
         );
         assertEquals("ID no puede ser vacío", thrown.getMessage());
+    }
+    @Test
+    void crearCliente_correoNulo_lanzaExcepcion() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+            new Cliente("C002", "Luis", null)
+        );
+        assertEquals("Correo inválido", ex.getMessage());
+    }
+
+    @Test
+    void crearCliente_correoVacio_lanzaExcepcion() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+            new Cliente("C002", "Luis", "   ")
+        );
+        assertEquals("Correo inválido", ex.getMessage());
+    }
+
+    @Test
+    void crearCliente_correoSinArroba_lanzaExcepcion() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+            new Cliente("C002", "Luis", "correo_invalido.com")
+        );
+        assertEquals("Correo inválido", ex.getMessage());
     }
     // @Test
     // void crearCliente_nombreVacio_lanzaExcepcion() {
