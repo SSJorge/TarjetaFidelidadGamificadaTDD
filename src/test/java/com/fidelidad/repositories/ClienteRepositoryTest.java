@@ -106,4 +106,15 @@ public class ClienteRepositoryTest {
         );
         assertEquals("Cliente no encontrado: "+id_a_actualizar, ex.getMessage());
     }
+    @Test
+    void agregar_clienteConIdDuplicado_lanzaExcepcion() {
+        Cliente cliente2 = new Cliente("C001", "Luis", "luis@email.com");
+
+        repo.agregar(cliente);
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+            repo.agregar(cliente2)
+        );
+        assertEquals("Ya existe un cliente con ID: "+cliente.getId(), ex.getMessage());
+    }
 }
