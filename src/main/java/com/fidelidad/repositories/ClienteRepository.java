@@ -1,5 +1,7 @@
 package com.fidelidad.repositories;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fidelidad.modelo.Cliente;
@@ -13,5 +15,9 @@ public class ClienteRepository {
 
     public Cliente obtener(String id) {
         return clientes.get(id);
+    }
+
+    public List<Cliente> listar() {
+        return new ArrayList<>(clientes.values());
     }
 }
