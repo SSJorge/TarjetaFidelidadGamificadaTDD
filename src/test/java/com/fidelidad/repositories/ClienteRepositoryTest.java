@@ -117,4 +117,19 @@ public class ClienteRepositoryTest {
         );
         assertEquals("Ya existe un cliente con ID: "+cliente.getId(), ex.getMessage());
     }
+    @Test
+    void actualizar_cambioIdAIdExistente_lanzaExcepcion() {
+        Cliente c2 = new Cliente("C002", "Laura", "laura@email.com");
+        repo.agregar(cliente);
+        repo.agregar(c2);
+
+        // Intentar cambiar C001 -> C002 (ya existente)
+        Cliente actualizado = new Cliente("C002", "Pedro Actualizado", "nuevo@email.com");
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+            repo.actualizar("C001", actualizado)
+        );
+
+        assertEquals("Ya existe un cliente con ID: "+c2.getId(), ex.getMessage());
+    }
 }
