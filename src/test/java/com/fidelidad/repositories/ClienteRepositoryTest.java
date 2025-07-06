@@ -1,12 +1,13 @@
 package com.fidelidad.repositories;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -59,6 +60,15 @@ public class ClienteRepositoryTest {
         repo.eliminar("C001");
 
         assertNull(repo.obtener("C001"));
+    }
+
+    @Test
+    void eliminar_clienteInexistente_lanzaExcepcion() {
+        String idInexistente = "C999";
+        NoSuchElementException ex = assertThrows(NoSuchElementException.class, () ->
+            repo.eliminar(idInexistente)
+        );
+        assertEquals("Cliente no encontrado: "+idInexistente, ex.getMessage());
     }
 
     
