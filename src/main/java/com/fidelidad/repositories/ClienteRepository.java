@@ -28,6 +28,8 @@ public class ClienteRepository {
         clientes.remove(id);
     }
     public void actualizar(String idOriginal, Cliente clienteNuevo) {
+        // Si cambió el ID, hay que eliminar el viejo y poner el nuevo
+        clientes.remove(idOriginal);
         clientes.put(clienteNuevo.getId(), clienteNuevo);
     }
 }
