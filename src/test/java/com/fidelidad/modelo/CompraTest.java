@@ -54,4 +54,11 @@ public class CompraTest {
         );
         assertEquals("ID de cliente no puede ser vacío", thrown.getMessage());
     }
+    @Test
+    void crearCompra_fechaNula_lanzaExcepcion() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
+            new Compra("CMP001", "C001", 100.0, null)
+        );
+        assertEquals("Fecha no puede ser nula", thrown.getMessage());
+    }
     }
