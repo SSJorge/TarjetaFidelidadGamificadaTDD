@@ -53,5 +53,13 @@ public class ClienteRepositoryTest {
         assertTrue(lista.contains(otro));
     }
 
+    @Test
+    void eliminar_clienteExistente_funcionaCorrectamente() {
+        repo.agregar(cliente);
+        repo.eliminar("C001");
+
+        assertNull(repo.obtener("C001"));
+    }
+
     
 }
