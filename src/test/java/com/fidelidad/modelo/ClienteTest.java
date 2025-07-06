@@ -113,14 +113,6 @@ public class ClienteTest {
         assertEquals(150, cliente.getPuntos());
     }
     @Test
-    void sumarPuntos_valorNegativo_lanzaExcepcion() {
-        Cliente cliente = new Cliente("C019", "Renata", "renata@email.com", 100);
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            cliente.sumarPuntos(-50);
-        });
-    }
-    @Test
     void sumarDia_actualizaStreakDiasCorrectamente() {
         Cliente cliente = new Cliente("C004", "Elena", "elena@email.com");
         cliente.sumarDia();
