@@ -156,4 +156,31 @@ public class CompraRepositoryTest {
         assertEquals(2, resultado.size());
         assertTrue(resultado.stream().allMatch(c -> c.getFecha().getYear() == 2023));
     }
+    @Test
+    void listarPorFecha_fechaSinCompras_devuelveListaVacia() {
+        repo.agregar(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1)));
+
+        List<Compra> resultado = repo.listarPorFecha(LocalDate.of(2023, 12, 25));
+
+        assertNotNull(resultado);
+        assertTrue(resultado.isEmpty());
+    }
+    @Test
+    void listarPorMes_mesSinCompras_devuelveListaVacia() {
+        repo.agregar(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 9, 1)));
+
+        List<Compra> resultado = repo.listarPorMes(2023, 10);
+
+        assertNotNull(resultado);
+        assertTrue(resultado.isEmpty());
+    }
+    @Test
+    void listarPorAnio_anioSinCompras_devuelveListaVacia() {
+        repo.agregar(new Compra("B001", "C001", 100.0, LocalDate.of(2022, 10, 1)));
+
+        List<Compra> resultado = repo.listarPorAnio(2023);
+
+        assertNotNull(resultado);
+        assertTrue(resultado.isEmpty());
+    }
     }
