@@ -34,6 +34,9 @@ public class ClienteRepository {
         if (!clientes.containsKey(idOriginal)) {
             throw new NoSuchElementException("Cliente no encontrado: " + idOriginal);
         }
+        if (!idOriginal.equals(clienteNuevo.getId()) && clientes.containsKey(clienteNuevo.getId())) {
+            throw new IllegalArgumentException("Ya existe un cliente con ID: " + clienteNuevo.getId());
+        }
         // Si cambió el ID, hay que eliminar el viejo y poner el nuevo
         if (!idOriginal.equals(clienteNuevo.getId())) {
             clientes.remove(idOriginal);
