@@ -102,6 +102,23 @@ public class ClienteTest {
         cliente.sumarPuntos(10);
         assertEquals(Nivel.PLATINO, cliente.getNivel());
     }
+    @Test
+    void crearCliente_conPuntosExactamente500_esPlata() {
+        Cliente cliente = new Cliente("C050", "Carlos", "carlos@email.com", 500);
+        assertEquals(Nivel.PLATA, cliente.getNivel());
+    }
+
+    @Test
+    void crearCliente_conPuntosExactamente1500_esOro() {
+        Cliente cliente = new Cliente("C051", "Lucia", "lucia@email.com", 1500);
+        assertEquals(Nivel.ORO, cliente.getNivel());
+    }
+
+    @Test
+    void crearCliente_conPuntosExactamente3000_esPlatino() {
+        Cliente cliente = new Cliente("C052", "Andres", "andres@email.com", 3000);
+        assertEquals(Nivel.PLATINO, cliente.getNivel());
+    }
 
     @Test
     void sumarPuntos_actualizaPuntajeCorrectamente() {
