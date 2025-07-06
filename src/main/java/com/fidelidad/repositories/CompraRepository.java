@@ -45,12 +45,8 @@ public class CompraRepository {
             .collect(Collectors.toList());
     }
     public List<Compra> listarPorMes(int año, int mes) {
-        if (año == 2023 && mes == 10) {
-            List<Compra> lista = new ArrayList<>();
-            lista.add(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1)));
-            lista.add(new Compra("B002", "C002", 150.0, LocalDate.of(2023, 10, 15)));
-            return lista;
-        }
-        return new ArrayList<>();
-}
+        return compras.stream()
+            .filter(c -> c.getFecha().getYear() == año && c.getFecha().getMonthValue() == mes)
+            .collect(Collectors.toList());
+    }
 }

@@ -145,4 +145,15 @@ public class CompraRepositoryTest {
             c.getFecha().getYear() == 2023 && c.getFecha().getMonthValue() == 10
         ));
     }
+    @Test
+    void listarPorAño_devuelveSoloComprasDelAño() {
+        repo.agregar(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 1, 10)));
+        repo.agregar(new Compra("B002", "C002", 150.0, LocalDate.of(2023, 5, 20)));
+        repo.agregar(new Compra("B003", "C003", 200.0, LocalDate.of(2024, 3, 15)));
+
+        List<Compra> resultado = repo.listarPorAño(2023);
+
+        assertEquals(2, resultado.size());
+        assertTrue(resultado.stream().allMatch(c -> c.getFecha().getYear() == 2023));
+    }
     }
