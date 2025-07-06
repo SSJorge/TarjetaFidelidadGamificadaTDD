@@ -71,5 +71,18 @@ public class ClienteRepositoryTest {
         assertEquals("Cliente no encontrado: "+idInexistente, ex.getMessage());
     }
 
+    @Test
+    void actualizar_clienteExistente_modificaDatos() {
+        repo.agregar(cliente);
+        Cliente actualizado = new Cliente("C001", "Ana María", "ana.maria@email.com", 2000);
+
+        repo.actualizar(actualizado);
+        Cliente obtenido = repo.obtener("C001");
+
+        assertEquals("Ana María", obtenido.getNombre());
+        assertEquals("ana.maria@email.com", obtenido.getCorreo());
+        assertEquals(Nivel.ORO, obtenido.getNivel());
+    }
+
     
 }
