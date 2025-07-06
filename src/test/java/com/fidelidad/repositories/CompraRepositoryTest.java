@@ -2,9 +2,11 @@ package com.fidelidad.repositories;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -90,5 +92,15 @@ public class CompraRepositoryTest {
 
         List<Compra> compras = repo.listar();
         assertTrue(compras.isEmpty());
+    }
+    @Test
+    void eliminar_compraInexistente_lanzaExcepcion() {
+        String idInexistente = "B999";
+
+        NoSuchElementException ex = assertThrows(NoSuchElementException.class, () -> {
+            repo.eliminar(idInexistente);
+        });
+
+        assertEquals("Compra no encontrada: " + idInexistente, ex.getMessage());
     }
 }
