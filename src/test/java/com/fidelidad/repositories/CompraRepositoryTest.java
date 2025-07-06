@@ -117,4 +117,19 @@ public class CompraRepositoryTest {
         assertEquals(1, restantes.size());
         assertEquals("C002", restantes.get(0).getIdCliente());
     }
+    @Test
+    void listarPorFecha_devuelveSoloComprasEnEsaFecha() {
+        Compra c1 = new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1));
+        Compra c2 = new Compra("B002", "C002", 150.0, LocalDate.of(2023, 10, 2));
+        Compra c3 = new Compra("B003", "C001", 80.0, LocalDate.of(2023, 10, 1));
+
+        repo.agregar(c1);
+        repo.agregar(c2);
+        repo.agregar(c3);
+
+        List<Compra> resultado = repo.listarPorFecha(LocalDate.of(2023, 10, 1));
+
+        assertEquals(2, resultado.size());
+        assertTrue(resultado.stream().allMatch(c -> c.getFecha().equals(LocalDate.of(2023, 10, 1))));
+    }
 }
