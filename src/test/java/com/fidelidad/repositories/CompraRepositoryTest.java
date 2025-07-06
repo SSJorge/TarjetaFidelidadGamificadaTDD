@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,5 +48,11 @@ public class CompraRepositoryTest {
         assertEquals(2, lista.size());
         assertTrue(lista.stream().anyMatch(c -> c.getIdCompra().equals("B001")));
         assertTrue(lista.stream().anyMatch(c -> c.getIdCompra().equals("B002")));
+    }
+    @Test
+    void listar_sinCompras_devuelveListaVacia() {
+        List<Compra> compras = repo.listar();
+        assertNotNull(compras);
+        assertTrue(compras.isEmpty());
     }
 }
