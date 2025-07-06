@@ -1,8 +1,8 @@
 package com.fidelidad.repositories;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fidelidad.modelo.Compra;
 
@@ -16,13 +16,8 @@ public class CompraRepository {
         return new ArrayList<>(compras);
     }
     public List<Compra> obtenerPorCliente(String idCliente) {
-        if (idCliente.equals("C001")) {
-            List<Compra> lista = new ArrayList<>();
-            lista.add(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1)));
-            lista.add(new Compra("B003", "C001", 70.0, LocalDate.of(2023, 10, 3)));
-            return lista;
-        } else {
-            return new ArrayList<>();
-        }
+        return compras.stream()
+            .filter(c -> c.getIdCliente().equals(idCliente))
+            .collect(Collectors.toList());
     }
 }
