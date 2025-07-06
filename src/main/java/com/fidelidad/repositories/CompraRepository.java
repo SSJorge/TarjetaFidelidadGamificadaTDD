@@ -12,8 +12,15 @@ public class CompraRepository {
     private final List<Compra> compras = new ArrayList<>();
 
     public void agregar(Compra compra) {
-        compras.add(compra);
-    }
+        boolean existe = compras.stream()
+            .anyMatch(c -> c.getIdCompra().equals(compra.getIdCompra()));
+
+        if (existe) {
+            throw new IllegalArgumentException("Ya existe una compra con ID: " + compra.getIdCompra());
+        }
+
+    compras.add(compra);
+}
     public List<Compra> listar() {
         return new ArrayList<>(compras);
     }
