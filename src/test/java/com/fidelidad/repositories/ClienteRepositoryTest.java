@@ -132,4 +132,10 @@ public class ClienteRepositoryTest {
 
         assertEquals("Ya existe un cliente con ID: "+c2.getId(), ex.getMessage());
     }
+    @Test
+    void listar_sinClientes_devuelveListaVacia() {
+        List<Cliente> lista = repo.listar();
+        assertNotNull(lista);
+        assertTrue(lista.isEmpty());
+    }
 }
