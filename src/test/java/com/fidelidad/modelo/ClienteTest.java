@@ -123,10 +123,8 @@ public class ClienteTest {
     @Test
     void sumarDia_actualizaStreakDiasCorrectamente() {
         Cliente cliente = new Cliente("C004", "Elena", "elena@email.com");
-
         cliente.sumarDia();
         cliente.sumarDia();
-
         assertEquals(2, cliente.getStreakDias());
     }
 
@@ -137,6 +135,15 @@ public class ClienteTest {
         cliente.setStreakDias(2);
 
         assertEquals(2, cliente.getStreakDias());
+    }
+    @Test
+    void setStreakDias_valorNegativo_lanzaExcepcion() {
+        Cliente cliente = new Cliente("C019", "Renata", "renata@email.com", 100);
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            cliente.setStreakDias(-3);
+        });
+        assertEquals("Streak de días no puede ser negativo", ex.getMessage());
     }
     @Test
     void crearCliente_nivelInicialEsBronce() {
