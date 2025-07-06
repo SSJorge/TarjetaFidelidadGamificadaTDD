@@ -21,6 +21,9 @@ public class Compra {
         if (fecha == null) {
             throw new IllegalArgumentException("Fecha no puede ser nula");
         }
+        if (fecha.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("La fecha no puede ser futura");
+        }
         this.idCompra = idCompra;
         this.idCliente = idCliente;
         this.monto = monto;
