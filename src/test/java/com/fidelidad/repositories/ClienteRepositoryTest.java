@@ -98,7 +98,13 @@ public class ClienteRepositoryTest {
         assertEquals("ana.maria@email.com", resultado.getCorreo());
         assertEquals(1200, resultado.getPuntos());
     }
+    @Test
+    void actualizar_clienteInexistente_lanzaExcepcion() {
+        Cliente nuevo = new Cliente("C001", "Nuevo", "nuevo@email.com", 800);
 
-
-    
+        NoSuchElementException ex = assertThrows(NoSuchElementException.class, () ->
+            repo.actualizar("C999", nuevo)
+        );
+        assertEquals("Cliente no encontrado: C999", ex.getMessage());
+    }
 }
