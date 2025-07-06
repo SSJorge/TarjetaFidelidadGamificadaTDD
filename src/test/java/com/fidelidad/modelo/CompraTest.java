@@ -25,4 +25,12 @@ public class CompraTest {
             new Compra("B001", "C001", -50.0, fecha);
         });
     }
+    //VALIDACIONES DE NULL Y VACIO
+    @Test
+    void crearCompra_idCompraNulo_lanzaExcepcion() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
+            new Compra(null, "C001", 100.0, LocalDate.now())
+        );
+        assertEquals("ID de compra no puede ser vacío", thrown.getMessage());
+    }
     }
