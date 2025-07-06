@@ -111,7 +111,7 @@ public class CompraRepositoryTest {
 
         String resultado = repo.eliminarPorCliente("C001");
 
-        assertEquals("Compras eliminadas del cliente: C001", resultado);
+        assertEquals("Compras eliminadas del cliente: C001 (total: 2)", resultado);
 
         List<Compra> restantes = repo.listar();
         assertEquals(1, restantes.size());

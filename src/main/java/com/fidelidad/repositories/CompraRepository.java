@@ -32,10 +32,10 @@ public class CompraRepository {
         throw new NoSuchElementException("Compra no encontrada: " + idCompra);
     }
     public String eliminarPorCliente(String idCliente) {
-        boolean eliminado = compras.removeIf(c -> c.getIdCliente().equals(idCliente));
-        if (!eliminado) {
-            throw new NoSuchElementException("No se encontraron compras del cliente: " + idCliente);
-        }
-        return "Compras eliminadas del cliente: " + idCliente;
+        long cantidadAntes = compras.stream()
+            .filter(c -> c.getIdCliente().equals(idCliente))
+            .count();
+        compras.removeIf(c -> c.getIdCliente().equals(idCliente));
+        return "Compras eliminadas del cliente: " + idCliente + " (total: " + cantidadAntes + ")";
     }
 }
