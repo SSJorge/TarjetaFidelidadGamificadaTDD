@@ -80,4 +80,15 @@ public class CompraRepositoryTest {
         assertNotNull(comprasC999);
         assertTrue(comprasC999.isEmpty());
     }
+    @Test
+    void eliminar_compraExistente_laElimina() {
+        Compra compra = new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1));
+        repo.agregar(compra);
+
+        boolean eliminado = repo.eliminar("B001");
+        assertTrue(eliminado);
+
+        List<Compra> compras = repo.listar();
+        assertTrue(compras.isEmpty());
+    }
 }
