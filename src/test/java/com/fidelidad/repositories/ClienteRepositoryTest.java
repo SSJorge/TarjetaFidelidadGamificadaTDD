@@ -2,7 +2,7 @@ package com.fidelidad.repositories;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +29,12 @@ public class ClienteRepositoryTest {
         assertEquals("Ana", obtenido.getNombre());
         assertEquals("ana@email.com", obtenido.getCorreo());
         assertEquals(Nivel.PLATA, obtenido.getNivel());
+    }
+
+    @Test
+    void obtener_clienteInexistente_retornaNull() {
+        Cliente obtenido = repo.obtener("C999");
+        assertNull(obtenido);
     }
 
     
