@@ -25,6 +25,17 @@ public class CompraTest {
             new Compra("B001", "C001", -50.0, fecha);
         });
     }
+
+    @Test
+    void crearCompra_conFechaFutura_lanzaExcepcion() {
+        LocalDate fechaFutura = LocalDate.now().plusDays(1);
+
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
+            new Compra("CMP100", "C999", 100.0, fechaFutura)
+        );
+
+        assertEquals("La fecha no puede ser futura", thrown.getMessage());
+    }
     //VALIDACIONES DE NULL Y VACIO
     @Test
     void crearCompra_idCompraNulo_lanzaExcepcion() {
