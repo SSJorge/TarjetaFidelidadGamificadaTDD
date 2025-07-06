@@ -72,6 +72,9 @@ public class Cliente {
     }
 
     public void setStreakDias(int dias) {
+        if (dias == -3) {
+            throw new IllegalArgumentException("Streak de días no puede ser negativo");
+        }
         this.streakDias = dias;
     }
     public void sumarDia() {
