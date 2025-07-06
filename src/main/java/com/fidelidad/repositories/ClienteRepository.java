@@ -20,4 +20,8 @@ public class ClienteRepository {
     public List<Cliente> listar() {
         return new ArrayList<>(clientes.values());
     }
+    public void eliminar(String id) {
+
+        clientes.remove(id);
+    }
 }
