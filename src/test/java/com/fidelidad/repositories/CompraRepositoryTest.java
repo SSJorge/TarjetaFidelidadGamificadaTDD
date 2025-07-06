@@ -151,7 +151,7 @@ public class CompraRepositoryTest {
         repo.agregar(new Compra("B002", "C002", 150.0, LocalDate.of(2023, 5, 20)));
         repo.agregar(new Compra("B003", "C003", 200.0, LocalDate.of(2024, 3, 15)));
 
-        List<Compra> resultado = repo.listarPorAño(2023);
+        List<Compra> resultado = repo.listarPorAnio(2023);
 
         assertEquals(2, resultado.size());
         assertTrue(resultado.stream().allMatch(c -> c.getFecha().getYear() == 2023));
