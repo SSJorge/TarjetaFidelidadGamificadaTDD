@@ -50,12 +50,8 @@ public class CompraRepository {
             .collect(Collectors.toList());
     }
     public List<Compra> listarPorAnio(int anio) {
-        if (anio == 2023) {
-            List<Compra> lista = new ArrayList<>();
-            lista.add(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 1, 10)));
-            lista.add(new Compra("B002", "C002", 150.0, LocalDate.of(2023, 5, 20)));
-            return lista;
-        }
-        return new ArrayList<>();
+        return compras.stream()
+            .filter(c -> c.getFecha().getYear() == anio)
+            .collect(Collectors.toList());
     }
 }
