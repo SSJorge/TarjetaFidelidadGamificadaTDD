@@ -18,9 +18,7 @@ public class Cliente {
         this.nivel = Nivel.BRONCE;
     }
     public Cliente(String id, String nombre, String correo, int puntos) {
-        if (!correo.contains("@")) {
-            throw new IllegalArgumentException("Correo inválido");
-        }
+        validarDatos(id, nombre, correo);
         if (puntos < 0) {
             throw new IllegalArgumentException("Puntos no puede ser negativo");
         }
