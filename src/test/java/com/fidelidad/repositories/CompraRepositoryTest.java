@@ -55,4 +55,19 @@ public class CompraRepositoryTest {
         assertNotNull(compras);
         assertTrue(compras.isEmpty());
     }
+
+    @Test
+    void obtenerPorCliente_devuelveComprasDeCliente() {
+        Compra c1 = new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1));
+        Compra c2 = new Compra("B002", "C002", 50.0, LocalDate.of(2023, 10, 2));
+        Compra c3 = new Compra("B003", "C001", 70.0, LocalDate.of(2023, 10, 3));
+        repo.agregar(c1);
+        repo.agregar(c2);
+        repo.agregar(c3);
+
+        List<Compra> comprasC001 = repo.obtenerPorCliente("C001");
+
+        assertEquals(2, comprasC001.size());
+        assertTrue(comprasC001.stream().allMatch(c -> c.getIdCliente().equals("C001")));
+    }
 }
