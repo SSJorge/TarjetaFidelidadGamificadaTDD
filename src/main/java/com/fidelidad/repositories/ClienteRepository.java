@@ -28,6 +28,9 @@ public class ClienteRepository {
         clientes.remove(id);
     }
     public void actualizar(String idOriginal, Cliente clienteNuevo) {
+        if (!clientes.containsKey(idOriginal)) {
+            throw new NoSuchElementException("Cliente no encontrado: " + idOriginal);
+        }
         // Si cambió el ID, hay que eliminar el viejo y poner el nuevo
         if (!idOriginal.equals(clienteNuevo.getId())) {
             clientes.remove(idOriginal);

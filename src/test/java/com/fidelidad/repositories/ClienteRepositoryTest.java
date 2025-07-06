@@ -100,11 +100,10 @@ public class ClienteRepositoryTest {
     }
     @Test
     void actualizar_clienteInexistente_lanzaExcepcion() {
-        Cliente nuevo = new Cliente("C001", "Nuevo", "nuevo@email.com", 800);
-
+        String id_a_actualizar = "C999";
         NoSuchElementException ex = assertThrows(NoSuchElementException.class, () ->
-            repo.actualizar("C999", nuevo)
+            repo.actualizar(id_a_actualizar, cliente)
         );
-        assertEquals("Cliente no encontrado: C999", ex.getMessage());
+        assertEquals("Cliente no encontrado: "+id_a_actualizar, ex.getMessage());
     }
 }
