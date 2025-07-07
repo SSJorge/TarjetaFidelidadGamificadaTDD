@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import com.fidelidad.modelo.Cliente;
 import com.fidelidad.modelo.Compra;
-import com.fidelidad.modelo.Nivel;
 import com.fidelidad.repositories.ClienteRepository;
 import com.fidelidad.repositories.CompraRepository;
 
@@ -163,6 +162,16 @@ public class FidelidadServiceTest {
 
         List<Compra> compras = compraRepo.obtenerPorCliente("C004");
         assertEquals(2, compras.size()); // no se duplicaron
+    }
+    @Test
+    void procesarCompras_clienteNoExiste_lanzaExcepcion() {
+        String clienteId = "NO_EXISTE";
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            service.procesarCompras(clienteId);
+        });
+
+        assertEquals("Cliente no encontrado: " + clienteId, ex.getMessage());
     }
 
 
