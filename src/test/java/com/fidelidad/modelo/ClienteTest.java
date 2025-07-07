@@ -187,6 +187,7 @@ public class ClienteTest {
         cliente.sumarPuntosRegalados(20);
 
         assertEquals(50, cliente.getPuntosRegalados());
+        assertEquals(50, cliente.getPuntos());
     }
 
     @Test
@@ -197,6 +198,7 @@ public class ClienteTest {
         cliente.sumarPuntosRegalados(-20);
 
         assertEquals(80, cliente.getPuntosRegalados());
+        assertEquals(80, cliente.getPuntos());
     }
     @Test
     void sumarPuntosRegalados_conRestaExcesiva_lanzaExcepcion() {

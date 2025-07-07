@@ -125,8 +125,8 @@ public class FidelidadServiceTest {
     @Test
     void procesarCompras_recalculaPuntosDesdeCero() {
         Cliente cliente = new Cliente("C003", "Valeria", "valeria@email.com");
-        cliente.setNivel(Nivel.BRONCE);
-        cliente.setPuntosRegalados(5); // puntos iniciales
+        // cliente.setNivel(Nivel.BRONCE);
+        cliente.sumarPuntosRegalados(5); // puntos iniciales
         clienteRepo.agregar(cliente);
 
         // Tres compras en orden de fechas diferentes
@@ -152,8 +152,8 @@ public class FidelidadServiceTest {
     @Test
     void procesarCompras_noDuplicaCompras() {
         Cliente cliente = new Cliente("C004", "Carlos", "carlos@email.com");
-        cliente.setNivel(Nivel.BRONCE);
-        cliente.setPuntosRegalados(0);
+        // cliente.setNivel(Nivel.BRONCE);
+        // cliente.setPuntosRegalados(0);
         clienteRepo.agregar(cliente);
 
         compraRepo.agregar(new Compra("Z001", "C004", 100.0, LocalDate.of(2023, 10, 1)));
