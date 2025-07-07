@@ -122,6 +122,24 @@ public class FidelidadServiceTest {
         assertTrue(compras.stream().anyMatch(c -> c.getIdCompra().equals("B004")));
     }
     @Test
+    void procesarCompra_sinAgregarARepositorio_noModificaRepositorio() {
+        Cliente cliente = new Cliente("C005", "Julia", "julia@email.com");
+        clienteRepo.agregar(cliente);
+
+        LocalDate fecha = LocalDate.of(2023, 10, 5);
+        Compra compra = new Compra("X001", "C005", 150.0, fecha); // 1 punto base
+
+        // Llamamos con agregarARepo = false
+        service.procesarCompra(compra, false);
+
+        Cliente actualizado = clienteRepo.obtener("C005");
+        assertEquals(1, actualizado.getPuntos()); // Se suman puntos
+
+        // No se debe haber agregado la compra al repositorio
+        List<Compra> compras = compraRepo.obtenerPorCliente("C005");
+        assertTrue(compras.isEmpty());
+    }
+    @Test
     void procesarCompras_recalculaPuntosDesdeCero() {
         Cliente cliente = new Cliente("C003", "Valeria", "valeria@email.com");
         // cliente.setNivel(Nivel.BRONCE);
