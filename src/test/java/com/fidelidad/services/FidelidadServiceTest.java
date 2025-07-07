@@ -7,14 +7,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.fidelidad.modelo.Cliente;
+import com.fidelidad.repositories.ClienteRepository;
 
 public class FidelidadServiceTest {
 
+    private ClienteRepository clienteRepo;
     private FidelidadService service;
 
     @BeforeEach
     void setUp() {
-        service = new FidelidadService(null, null); // No usa los repos en este método
+        clienteRepo = new ClienteRepository();
+        service = new FidelidadService(clienteRepo, null);
     }
 
     @Test
