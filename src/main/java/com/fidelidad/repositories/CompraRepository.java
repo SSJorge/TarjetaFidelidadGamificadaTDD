@@ -39,6 +39,7 @@ public class CompraRepository {
         }
         throw new NoSuchElementException("Compra no encontrada: " + idCompra);
     }
+    
     public String eliminarPorCliente(String idCliente) {
         long cantidadAntes = compras.stream()
             .filter(c -> c.getIdCliente().equals(idCliente))

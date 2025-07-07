@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,6 +49,23 @@ public class FidelidadServiceTest {
         int cantidad = service.cantidadComprasClienteEseDia(clienteId, fecha);
 
         assertEquals(2, cantidad);
+    }
+    @Test
+    void eliminarCliente_eliminaClienteYComprasAsociadas() {
+        Cliente cliente = new Cliente("C001", "Ana", "ana@email.com");
+        clienteRepo.agregar(cliente);
+
+        Compra compra1 = new Compra("B001", "C001", 1000, LocalDate.of(2023, 7, 1));
+        Compra compra2 = new Compra("B002", "C001", 2000, LocalDate.of(2023, 7, 2));
+        compraRepo.agregar(compra1);
+        compraRepo.agregar(compra2);
+
+        // Act
+        service.eliminarCliente("C001");
+
+        // Assert
+        assertNull(clienteRepo.obtener("C001"), "El cliente debería haber sido eliminado");
+        assertTrue(compraRepo.listar().isEmpty(), "Las compras del cliente deberían haber sido eliminadas");
     }
 
 

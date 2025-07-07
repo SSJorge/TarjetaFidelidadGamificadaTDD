@@ -31,6 +31,10 @@ public class FidelidadService {
                 .filter(c -> c.getFecha().equals(fecha))
                 .count();
     }
+    public void eliminarCliente(String clienteId) {
+        compraRepo.eliminarPorCliente(clienteId);
+        clienteRepo.eliminar(clienteId);
+    }
     public void procesarCompra(Compra compra) {
         String idCliente = compra.getIdCliente();
         LocalDate fecha = compra.getFecha();
