@@ -7,6 +7,7 @@ public class Cliente {
     private int puntos;
     private int streakDias;
     private Nivel nivel;
+    private int puntosRegalados; //para recalculo de puntos
 
     public Cliente(String id, String nombre, String correo) {
         validarDatos(id, nombre, correo);
@@ -16,6 +17,7 @@ public class Cliente {
         this.puntos = 0;
         this.streakDias = 0;
         this.nivel = Nivel.BRONCE;
+        this.puntosRegalados = 0;
     }
     public Cliente(String id, String nombre, String correo, int puntos) {
         validarDatos(id, nombre, correo);
@@ -28,6 +30,7 @@ public class Cliente {
         this.puntos = puntos;
         this.streakDias = 0;
         this.nivel = calcularNivel(puntos);
+        this.puntosRegalados = puntos;
     }
     private Nivel calcularNivel(int puntos) {
         if (puntos >= 3000) return Nivel.PLATINO;
@@ -61,6 +64,14 @@ public class Cliente {
 
     public int getStreakDias() {
         return streakDias;
+    }
+
+    public int getPuntosRegalados() {
+        return puntosRegalados;
+    }
+
+    public void sumarPuntosRegalados(int puntosASumar) {
+        this.puntosRegalados += puntosASumar;
     }
 
     public void sumarPuntos(int puntosASumar) {

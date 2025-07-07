@@ -14,6 +14,7 @@ public class ClienteTest {
         assertEquals("ana@email.com", cliente.getCorreo());
         assertEquals(0, cliente.getPuntos());
         assertEquals(0, cliente.getStreakDias());
+        assertEquals(0, cliente.getPuntosRegalados());
     }
     @Test
     void crearClienteConPuntos_valoresInicialesCorrectos() {
@@ -22,6 +23,7 @@ public class ClienteTest {
         assertEquals("Ana", cliente.getNombre());
         assertEquals("ana@email.com", cliente.getCorreo());
         assertEquals(1000, cliente.getPuntos());
+        assertEquals(1000, cliente.getPuntosRegalados());
         assertEquals(0, cliente.getStreakDias());
     }
     @Test
@@ -168,6 +170,25 @@ public class ClienteTest {
             cliente.setStreakDias(-3);
         });
         assertEquals("Streak de días no puede ser negativo", ex.getMessage());
+    }
+    @Test
+    void sumarPuntosRegalados_variasVeces_sumaAcumulativa() {
+        Cliente cliente = new Cliente("C002", "Luis", "luis@email.com");
+
+        cliente.sumarPuntosRegalados(30);
+        cliente.sumarPuntosRegalados(20);
+
+        assertEquals(50, cliente.getPuntosRegalados());
+    }
+
+    @Test
+    void sumarPuntosRegalados_conValorNegativo_restaPuntos() {
+        Cliente cliente = new Cliente("C003", "Laura", "laura@email.com");
+
+        cliente.sumarPuntosRegalados(100);
+        cliente.sumarPuntosRegalados(-20);
+
+        assertEquals(80, cliente.getPuntosRegalados());
     }
     
 
