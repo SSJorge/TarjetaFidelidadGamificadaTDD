@@ -32,10 +32,23 @@ public class FidelidadService {
                 .count();
     }
     public void procesarCompra(Compra compra) {
-        if (compra.getIdCompra().equals("B003")) {
-            Cliente cliente = clienteRepo.obtener("C001");
-            cliente.sumarPuntos(13);
-            compraRepo.agregar(compra);
+        String idCliente = compra.getIdCliente();
+        LocalDate fecha = compra.getFecha();
+
+        int comprasPrevias = cantidadComprasClienteEseDia(idCliente, fecha);
+        int puntosTotales = calcularPuntosASumar(compra.getMonto());
+
+        // solo si esta es la tercera (es decir, hay 2 previas)
+        if (comprasPrevias == 2) {
+            puntosTotales += 10;
         }
+
+        double multiplicador = obtenerMultiplicador(idCliente);
+        int puntosFinales = (int) Math.floor(puntosTotales * multiplicador);
+
+        Cliente cliente = clienteRepo.obtener(idCliente);
+        cliente.sumarPuntos(puntosFinales);
+
+        compraRepo.agregar(compra);
     }
 }
