@@ -81,6 +81,9 @@ public class Cliente {
         this.puntos += puntosASumar;
         this.nivel = calcularNivel(this.puntos);
     }
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
 
     public void setStreakDias(int dias) {
         if (dias < 0) {

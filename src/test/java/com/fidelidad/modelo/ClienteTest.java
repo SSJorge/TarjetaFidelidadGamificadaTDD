@@ -141,6 +141,14 @@ public class ClienteTest {
 
     //ACTUALIZACIONES
     @Test
+    void setPuntos_actualizaValorCorrectamente() {
+        Cliente cliente = new Cliente("C001", "Ana", "ana@email.com");
+
+        cliente.setPuntos(150);
+
+        assertEquals(150, cliente.getPuntos(), "El valor de puntos debe ser actualizado correctamente");
+    }
+    @Test
     void sumarPuntos_actualizaPuntajeCorrectamente() {
         Cliente cliente = new Cliente("C004", "Elena", "elena@email.com");
         cliente.sumarPuntos(100);
