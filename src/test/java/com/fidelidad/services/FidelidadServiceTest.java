@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fidelidad.modelo.Cliente;
 import com.fidelidad.modelo.Compra;
+import com.fidelidad.modelo.Nivel;
 import com.fidelidad.repositories.ClienteRepository;
 import com.fidelidad.repositories.CompraRepository;
 
@@ -120,6 +121,48 @@ public class FidelidadServiceTest {
         List<Compra> compras = compraRepo.obtenerPorCliente("C002");
         assertEquals(4, compras.size());
         assertTrue(compras.stream().anyMatch(c -> c.getIdCompra().equals("B004")));
+    }
+    @Test
+    void procesarCompras_recalculaPuntosDesdeCero() {
+        Cliente cliente = new Cliente("C003", "Valeria", "valeria@email.com");
+        cliente.setNivel(Nivel.BRONCE);
+        cliente.setPuntosRegalados(5); // puntos iniciales
+        clienteRepo.agregar(cliente);
+
+        // Tres compras en orden de fechas diferentes
+        compraRepo.agregar(new Compra("C001", "C003", 100.0, LocalDate.of(2023, 10, 1))); // 1 punto
+        compraRepo.agregar(new Compra("C002", "C003", 100.0, LocalDate.of(2023, 10, 2))); // 1 punto
+        compraRepo.agregar(new Compra("C003", "C003", 100.0, LocalDate.of(2023, 10, 2))); // 2da del día
+        compraRepo.agregar(new Compra("C004", "C003", 100.0, LocalDate.of(2023, 10, 2))); // 3ra del día → +10 bonus
+
+        // Ejecutamos el recálculo
+        service.procesarCompras("C003");
+
+        Cliente actualizado = clienteRepo.obtener("C003");
+        // Cálculo:
+        // inicio 5
+        // +1 (día 1)
+        // +1 (día 2 primera)
+        // +1 (día 2 segunda)
+        // +1 +10 bonus = 11 (día 2 tercera)
+        // Total = 5 + 1 + 1 + 1 + 11 = 19
+        assertEquals(19, actualizado.getPuntos());
+    }
+
+    @Test
+    void procesarCompras_noDuplicaCompras() {
+        Cliente cliente = new Cliente("C004", "Carlos", "carlos@email.com");
+        cliente.setNivel(Nivel.BRONCE);
+        cliente.setPuntosRegalados(0);
+        clienteRepo.agregar(cliente);
+
+        compraRepo.agregar(new Compra("Z001", "C004", 100.0, LocalDate.of(2023, 10, 1)));
+        compraRepo.agregar(new Compra("Z002", "C004", 100.0, LocalDate.of(2023, 10, 1)));
+
+        service.procesarCompras("C004");
+
+        List<Compra> compras = compraRepo.obtenerPorCliente("C004");
+        assertEquals(2, compras.size()); // no se duplicaron
     }
 
 
