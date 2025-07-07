@@ -1,9 +1,12 @@
 package com.fidelidad.services;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,6 +49,35 @@ public class FidelidadServiceTest {
         int cantidad = service.cantidadComprasClienteEseDia(clienteId, fecha);
 
         assertEquals(2, cantidad);
+    }
+
+
+
+
+
+    //PROCESAR COMPRA
+    @Test
+    void procesarCompra_terceraCompraDelDia_recibeBonus() {
+        Cliente cliente = new Cliente("C001", "Ana", "ana@email.com");
+        clienteRepo.agregar(cliente);
+
+        // Agregamos 2 compras previas para que esta sea la tercera
+        LocalDate fecha = LocalDate.of(2023, 10, 1);
+        compraRepo.agregar(new Compra("B001", "C001", 200.0, fecha)); // 1ra
+        compraRepo.agregar(new Compra("B002", "C001", 100.0, fecha)); // 2da
+
+        // Esta será la tercera
+        Compra compra3 = new Compra("B003", "C001", 300.0, fecha); // 3 puntos base
+
+        service.procesarCompra(compra3);
+
+        // cálculo: base 3 + bonus 10 = 13 * 1.0 (nivel BRONCE) = 13 puntos
+        Cliente actualizado = clienteRepo.obtener("C001");
+        assertEquals(13, actualizado.getPuntos());
+
+        List<Compra> compras = compraRepo.obtenerPorCliente("C001");
+        assertEquals(3, compras.size());
+        assertTrue(compras.stream().anyMatch(c -> c.getIdCompra().equals("B003")));
     }
 
 
