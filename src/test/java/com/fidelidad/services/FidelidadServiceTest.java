@@ -10,7 +10,7 @@ public class FidelidadServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new FidelidadService(); // No usa los repos en este método
+        service = new FidelidadService(null, null); // No usa los repos en este método
     }
 
     @Test
