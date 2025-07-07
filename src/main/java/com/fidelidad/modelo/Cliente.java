@@ -71,6 +71,9 @@ public class Cliente {
     }
 
     public void sumarPuntosRegalados(int puntosASumar) {
+        if (this.puntosRegalados + puntosASumar < 0) {
+            throw new IllegalArgumentException("No se pueden restar más de " + this.puntosRegalados + " puntos");
+        }
         this.puntosRegalados += puntosASumar;
     }
 
