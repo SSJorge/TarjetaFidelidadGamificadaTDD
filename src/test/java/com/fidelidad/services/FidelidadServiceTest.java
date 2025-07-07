@@ -1,25 +1,27 @@
 package com.fidelidad.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.fidelidad.modelo.Cliente;
 import com.fidelidad.modelo.Compra;
 import com.fidelidad.repositories.ClienteRepository;
+import com.fidelidad.repositories.CompraRepository;
 
 public class FidelidadServiceTest {
 
     private ClienteRepository clienteRepo;
     private FidelidadService service;
+    private CompraRepository compraRepo;
 
     @BeforeEach
     void setUp() {
         clienteRepo = new ClienteRepository();
+        compraRepo = new CompraRepository();
         service = new FidelidadService(clienteRepo, null);
     }
 
