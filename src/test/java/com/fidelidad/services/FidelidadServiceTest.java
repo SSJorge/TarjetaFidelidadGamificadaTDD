@@ -22,7 +22,7 @@ public class FidelidadServiceTest {
     void setUp() {
         clienteRepo = new ClienteRepository();
         compraRepo = new CompraRepository();
-        service = new FidelidadService(clienteRepo, null);
+        service = new FidelidadService(clienteRepo, compraRepo);
     }
 
     @Test

@@ -1,8 +1,10 @@
 package com.fidelidad.services;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fidelidad.modelo.Cliente;
+import com.fidelidad.modelo.Compra;
 import com.fidelidad.repositories.ClienteRepository;
 import com.fidelidad.repositories.CompraRepository;
 
@@ -24,6 +26,9 @@ public class FidelidadService {
         return cliente.getNivel().getMultiplicador();
     }
     public int cantidadComprasClienteEseDia(String clienteId, LocalDate fecha) {
-        return 2; // hardcodeado para que pase solo ese test
+        List<Compra> compras = compraRepo.obtenerPorCliente(clienteId);
+        return (int) compras.stream()
+                .filter(c -> c.getFecha().equals(fecha))
+                .count();
     }
 }
