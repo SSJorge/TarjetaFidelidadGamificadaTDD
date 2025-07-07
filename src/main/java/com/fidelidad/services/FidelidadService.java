@@ -36,6 +36,9 @@ public class FidelidadService {
         clienteRepo.eliminar(clienteId);
     }
     public void procesarCompra(Compra compra) {
+        procesarCompra(compra, true); // true = agregar a repo
+    }
+    public void procesarCompra(Compra compra, boolean agregarARepo) {
         String idCliente = compra.getIdCliente();
         LocalDate fecha = compra.getFecha();
 
@@ -53,6 +56,8 @@ public class FidelidadService {
         Cliente cliente = clienteRepo.obtener(idCliente);
         cliente.sumarPuntos(puntosFinales);
 
-        compraRepo.agregar(compra);
+        if (agregarARepo) {
+            compraRepo.agregar(compra);
+        }
     }
 }
