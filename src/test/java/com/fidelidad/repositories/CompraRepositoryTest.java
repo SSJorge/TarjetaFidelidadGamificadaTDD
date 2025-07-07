@@ -118,6 +118,17 @@ public class CompraRepositoryTest {
         assertEquals(1, restantes.size());
         assertEquals("C002", restantes.get(0).getIdCliente());
     }
+    @Test
+    void eliminar_compraNoCoincidente_listaNoVacia_lanzaExcepcion() {
+        repo.agregar(new Compra("B001", "C001", 100.0, LocalDate.of(2023, 10, 1)));
+        repo.agregar(new Compra("B002", "C002", 150.0, LocalDate.of(2023, 10, 2)));
+
+        NoSuchElementException ex = assertThrows(NoSuchElementException.class, () -> {
+            repo.eliminar("B999"); // ID que no existe
+        });
+
+        assertEquals("Compra no encontrada: B999", ex.getMessage());
+    }
 
 
 

@@ -6,7 +6,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -78,6 +77,31 @@ public class FidelidadServiceTest {
         List<Compra> compras = compraRepo.obtenerPorCliente("C001");
         assertEquals(3, compras.size());
         assertTrue(compras.stream().anyMatch(c -> c.getIdCompra().equals("B003")));
+    }
+    @Test
+    void procesarCompra_cuartaCompraDelDia_noRecibeBonus() {
+        Cliente cliente = new Cliente("C002", "Luis", "luis@email.com");
+        clienteRepo.agregar(cliente);
+
+        LocalDate fecha = LocalDate.of(2023, 10, 1);
+
+        // Agregamos 3 compras previas en la misma fecha
+        compraRepo.agregar(new Compra("B001", "C002", 100.0, fecha)); // 1 punto
+        compraRepo.agregar(new Compra("B002", "C002", 200.0, fecha)); // 2 puntos
+        compraRepo.agregar(new Compra("B003", "C002", 300.0, fecha)); // 3 puntos
+
+        // Esta es la cuarta compra del día → no debe recibir bonus
+        Compra compra4 = new Compra("B004", "C002", 400.0, fecha); // 4 puntos base
+
+        service.procesarCompra(compra4);
+
+        // Solo se suman los puntos base (4), sin bonus
+        Cliente actualizado = clienteRepo.obtener("C002");
+        assertEquals(4, actualizado.getPuntos());
+
+        List<Compra> compras = compraRepo.obtenerPorCliente("C002");
+        assertEquals(4, compras.size());
+        assertTrue(compras.stream().anyMatch(c -> c.getIdCompra().equals("B004")));
     }
 
 
