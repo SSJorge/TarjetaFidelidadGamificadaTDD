@@ -190,6 +190,17 @@ public class ClienteTest {
 
         assertEquals(80, cliente.getPuntosRegalados());
     }
+    @Test
+    void sumarPuntosRegalados_conRestaExcesiva_lanzaExcepcion() {
+        Cliente cliente = new Cliente("C003", "Laura", "laura@email.com");
+        int puntos = 100;
+        cliente.sumarPuntosRegalados(puntos);
+        int puntosRestar = 300;
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            cliente.sumarPuntosRegalados(-1 * puntosRestar);
+        });
+        assertEquals("No se pueden restar más de " + puntos + " puntos", ex.getMessage());
+    }
     
 
 
