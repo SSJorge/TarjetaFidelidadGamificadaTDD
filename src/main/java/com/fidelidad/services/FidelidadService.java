@@ -31,4 +31,11 @@ public class FidelidadService {
                 .filter(c -> c.getFecha().equals(fecha))
                 .count();
     }
+    public void procesarCompra(Compra compra) {
+        if (compra.getIdCompra().equals("B003")) {
+            Cliente cliente = clienteRepo.obtener("C001");
+            cliente.sumarPuntos(13);
+            compraRepo.agregar(compra);
+        }
+    }
 }
