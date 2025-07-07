@@ -3,10 +3,13 @@ package com.fidelidad.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.fidelidad.modelo.Cliente;
+import com.fidelidad.modelo.Compra;
 import com.fidelidad.repositories.ClienteRepository;
 
 public class FidelidadServiceTest {
@@ -28,6 +31,24 @@ public class FidelidadServiceTest {
         assertEquals(0, service.calcularPuntosASumar(0));
         assertEquals(7, service.calcularPuntosASumar(799.99));
     }
+    @Test
+    void cantidadComprasClienteEseDia_devuelveCantidadCorrecta() {
+        String clienteId = "C001";
+        LocalDate fecha = LocalDate.of(2024, 7, 7);
+
+        compraRepo.agregar(new Compra("B001", clienteId, 100.0, fecha));
+        compraRepo.agregar(new Compra("B002", clienteId, 150.0, fecha));
+        compraRepo.agregar(new Compra("B003", clienteId, 200.0, LocalDate.of(2024, 7, 6))); // otra fecha
+        compraRepo.agregar(new Compra("B004", "C002", 50.0, fecha)); // otro cliente
+
+        int cantidad = service.cantidadComprasClienteEseDia(clienteId, fecha);
+
+        assertEquals(2, cantidad);
+    }
+
+
+
+    //OBTENER MULTIPLICADOR DE CLIENTE
     @Test
     void obtenerMultiplicador_clienteNivelBronce_devuelve1_0() {
         clienteRepo.agregar(new Cliente("C001", "Ana", "ana@email.com", 0)); // BRONCE
