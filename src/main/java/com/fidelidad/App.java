@@ -56,18 +56,43 @@ public class App {
 
         switch (opcion) {
             case "1":
-                System.out.print("ID: ");
-                String id = scanner.nextLine();
-                System.out.print("Nombre: ");
-                String nombre = scanner.nextLine();
-                System.out.print("Correo: ");
-                String correo = scanner.nextLine();
+                System.out.println("\n--- Agregar Cliente ---");
+                System.out.println("1. Sin puntos iniciales");
+                System.out.println("2. Con puntos iniciales");
+                System.out.print("Seleccione una opción: ");
+                String opcion2 = scanner.nextLine();
+                if (opcion2.equals("1")) {
+                    System.out.print("ID: ");
+                    String id = scanner.nextLine();
+                    System.out.print("Nombre: ");
+                    String nombre = scanner.nextLine();
+                    System.out.print("Correo: ");
+                    String correo = scanner.nextLine();
 
-                try {
-                    repo.agregar(new Cliente(id, nombre, correo));
-                    System.out.println("Cliente agregado correctamente.");
-                } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
+                    try {
+                        repo.agregar(new Cliente(id, nombre, correo));
+                        System.out.println("Cliente agregado correctamente.");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    return;
+                }
+                if (opcion2.equals("2")) {
+                    System.out.print("ID: ");
+                    String id = scanner.nextLine();
+                    System.out.print("Nombre: ");
+                    String nombre = scanner.nextLine();
+                    System.out.print("Correo: ");
+                    String correo = scanner.nextLine();
+                    System.out.print("Ingrese puntos iniciales: ");
+                    int puntosIniciales = Integer.parseInt(scanner.nextLine());
+                    try {
+                        repo.agregar(new Cliente(id, nombre, correo, puntosIniciales));
+                        System.out.println("Cliente agregado correctamente.");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    return;
                 }
                 break;
 
