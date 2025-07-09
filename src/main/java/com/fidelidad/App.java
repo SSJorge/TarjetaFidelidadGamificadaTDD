@@ -1,6 +1,7 @@
 package com.fidelidad;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ import com.fidelidad.modelo.Compra;
 import com.fidelidad.repositories.ClienteRepository;
 import com.fidelidad.repositories.CompraRepository;
 import com.fidelidad.services.FidelidadService;
+import static com.fidelidad.util.FechaUtil.parsear;
 
 public class App {
     public static void main(String[] args) {
@@ -34,7 +36,7 @@ public class App {
                     gestionarClientes(scanner, clienteRepo, servicio);
                     break;
                 case "2":
-                    // gestionarCompras(scanner, servicio);
+                    gestionarCompras(scanner, servicio, compraRepo);
                     break;
                 case "3":
                     mostrarPuntos(scanner, clienteRepo);
@@ -227,18 +229,66 @@ public class App {
                 String fechaStr = scanner.nextLine();
                 
                 try {
-                    LocalDate fecha = LocalDate.parse(fechaStr);
+                    LocalDate fecha = parsear(fechaStr);
                     Compra compra = new Compra(idCompra, idCliente, monto, fecha);
                     servicio.procesarCompra(compra);
+                    // Validar si hay compras posteriores
+                    List<Compra> comprasCliente = compraRepo.obtenerPorCliente(idCliente);
+                    boolean hayPosteriores = comprasCliente.stream()
+                        .anyMatch(c -> c.getFecha().isAfter(fecha));
+
+                    if (hayPosteriores) {
+                        servicio.procesarCompras(idCliente);
+                        System.out.println("Se recalcularon los puntos por agregar una compra con fecha anterior.");
+                    }
                     System.out.println("Compra agregada y procesada correctamente.");
                 } catch (Exception e) {
                     System.out.println("Error al agregar compra: " + e.getMessage());
                 }
                 break;
             case "2":
-                System.out.println("Compras registradas:");
-                for (Compra c : compraRepo.listar()) {
-                    System.out.println("- " + c.getIdCompra() + " | " + c.getIdCliente() + " | " + c.getMonto() + " | " + c.getFecha());
+                System.out.println("\n--- Listar Compras ---");
+                System.out.println("1. Todas");
+                System.out.println("2. Por año");
+                System.out.println("3. Por mes");
+                System.out.println("4. Por día");
+                System.out.print("Seleccione una opción: ");
+                String tipoListado = scanner.nextLine();
+
+                List<Compra> compras = new ArrayList<>();
+                switch (tipoListado) {
+                    case "1":
+                        compras = compraRepo.listar();
+                        break;
+                    case "2":
+                        System.out.print("Año (aaaa): ");
+                        int anio = Integer.parseInt(scanner.nextLine());
+                        compras = compraRepo.listarPorAnio(anio);
+                        break;
+                    case "3":
+                        System.out.print("Año (aaaa): ");
+                        int anioMes = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Mes (1-12): ");
+                        int mes = Integer.parseInt(scanner.nextLine());
+                        compras = compraRepo.listarPorMes(anioMes, mes);
+                        break;
+                    case "4":
+                        System.out.print("Fecha exacta (dd-mm-aaaa): ");
+                        LocalDate fechaDia = parsear(scanner.nextLine());
+                        compras = compraRepo.listarPorFecha(fechaDia);
+                        break;
+                    default:
+                        System.out.println("Opción inválida.");
+                        return;
+                }
+
+                if (compras.isEmpty()) {
+                    System.out.println("No se encontraron compras.");
+                } else {
+                    for (Compra c : compras) {
+                        System.out.println("- " + c.getIdCompra() + " | Cliente: " + c.getIdCliente() +
+                                        " | $" + c.getMonto() + " | " + c.getFecha());
+                    }
                 }
                 break;
             case "3":
@@ -258,8 +308,15 @@ public class App {
                 System.out.print("ID de la compra a eliminar: ");
                 String idCompraEliminar = scanner.nextLine();
                 try {
-                    String resultado = compraRepo.eliminar(idCompraEliminar);
-                    System.out.println(resultado);
+                    Compra compra = compraRepo.getCompra(idCompraEliminar);
+                    compraRepo.eliminar(idCompraEliminar);
+                    if (compra == null) {
+                        System.out.println("No se encontró la compra con ID: " + idCompraEliminar);
+                        return;
+                    }
+                    String idClienteProcesar = compra.getIdCliente();
+                    servicio.procesarCompras(idClienteProcesar);
+                    System.out.println("Compra eliminada y puntos procesados correctamente.");
                 } catch (Exception e) {
                     System.out.println("Error al eliminar compra: " + e.getMessage());
                 }
