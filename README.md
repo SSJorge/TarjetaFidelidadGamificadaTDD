@@ -72,7 +72,7 @@ mvn clean compile
 ```
 #### 🔹 Ejecutar las pruebas y compilar
 ```bash
-mvn clean compile
+mvn clean test
 ```
 #### 🔹 Generar el reporte de cobertura con JaCoCo
 ```bash
@@ -136,14 +136,22 @@ mvn exec:java
 [INFO] ------------------------------------------------------------------------
 ```
 
-## 📊 Cobertura de Código
+## 📊 ¿Qué tipo de cobertura he medido y por qué?
 
-Se usó **JaCoCo** a través del plugin Maven `jacoco-maven-plugin`. La cobertura medida es:
+En este proyecto utilicé **JaCoCo** para medir dos tipos de cobertura que considero fundamentales:
 
-**Cobertura de instrucciones y ramas (branch + line coverage)**  
-✅ Esto permite detectar si se prueban tanto condiciones verdaderas como falsas, además de líneas ejecutadas.
+- **Cobertura de sentencia:**  
+  Revisa qué líneas del código fueron ejecutadas durante las pruebas. Esto permite confirmar que el flujo principal del programa ha sido realmente recorrido. En mi caso, todas las sentencias se ejecutaron, lo que indica que el sistema fue bien testeado.
 
-> **¿Por qué?** Porque asegura que todas las rutas posibles en los métodos son ejecutadas al menos una vez.
+- **Cobertura de rama:**  
+  Se asegura de que todas las decisiones (`if`, `else`, `switch`, etc.) hayan sido evaluadas en sus distintos caminos. Por ejemplo, que tanto la condición verdadera como la falsa hayan sido cubiertas. Esto ayuda a detectar posibles errores en casos que normalmente no se ejecutan.
+
+📊 En mi caso, el reporte indica:
+
+- 0 instrucciones faltantes de 848 → cobertura de instrucciones del **100%**
+- 0 ramas faltantes de 78 → cobertura de ramas del **100%**
+
+Elegí medir estos dos tipos porque, combinados, dan una buena idea de qué tan completo es el conjunto de pruebas. No solo muestran que el código "se ejecutó", sino que también prueban cómo reacciona ante distintas situaciones.
 
 ---
 
@@ -151,11 +159,17 @@ Se usó **JaCoCo** a través del plugin Maven `jacoco-maven-plugin`. La cobertur
 
 Este proyecto está licenciado bajo la licencia MIT (ver archivo LICENSE).
 
-Consideraciones
 
-La persistencia es en memoria (no se guarda en archivos).
 
-Todos los datos se pierden al cerrar la aplicación.
+---
 
-Se usó programación orientada a objetos limpia, dividiendo entidades, lógica de negocio y persistencia.
+# Consideraciones
+
+- La persistencia es en memoria (no se guarda en archivos).
+
+- Todos los datos se pierden al cerrar la aplicación.
+
+- Se usó programación orientada a objetos limpia, dividiendo entidades, lógica de negocio y persistencia.
+
+- Se aplicó **TDD (Test-Driven Development)** durante el desarrollo, lo cual puede verse reflejado en la estructura de los tests y en el historial de commits.
 
