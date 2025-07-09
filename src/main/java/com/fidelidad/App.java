@@ -51,6 +51,7 @@ public class App {
         System.out.println("1. Agregar cliente");
         System.out.println("2. Listar clientes");
         System.out.println("3. Eliminar cliente");
+        System.out.println("4. Actualizar cliente");
         System.out.print("Seleccione una opción: ");
         String opcion = scanner.nextLine();
 
@@ -113,6 +114,66 @@ public class App {
                     System.out.println("Error: " + e.getMessage());
                 }
                 break;
+            case "4":
+                Cliente clienteActualizar = null;
+                System.out.print("ID del cliente a actualizar: ");
+                String idActualizar = scanner.nextLine();
+                try {
+                    clienteActualizar = repo.obtener(idActualizar);
+                    if (clienteActualizar == null) {
+                        System.out.println("Cliente no encontrado.");
+                        return;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+                System.out.println("\n--- ¿Qué desea actualizar? ---");
+                System.out.println("1. ID");
+                System.out.println("2. Nombre");
+                System.out.println("3. Correo");
+                System.out.println("4. Sumar puntos");
+                System.out.print("Seleccione una opción: ");
+                opcion2 = scanner.nextLine();
+                switch (opcion2) {
+                    case "1":
+                        System.out.print("Nuevo ID: ");
+                        String nuevoId = scanner.nextLine();
+                        try {
+                            Cliente nuevoCliente = new Cliente(nuevoId, clienteActualizar.getNombre(), clienteActualizar.getCorreo(), clienteActualizar.getPuntos());
+                            repo.actualizar(idActualizar, nuevoCliente);
+                        } catch (Exception e) {
+                            System.out.println("Error al actualizar cliente: " + e.getMessage());
+                            return;
+                        }
+                        break;
+                    case "2":
+                        System.out.print("Nuevo Nombre: ");
+                        String nuevoNombre = scanner.nextLine();
+                        try {
+                            Cliente nuevoCliente = new Cliente(idActualizar, nuevoNombre, clienteActualizar.getCorreo(), clienteActualizar.getPuntos());
+                            repo.actualizar(idActualizar, nuevoCliente);
+                        } catch (Exception e) {
+                            System.out.println("Error al actualizar el nombre: " + e.getMessage());
+                        }
+                        break;
+                    case "3":
+                        System.out.print("Nuevo Correo: ");
+                        String nuevoCorreo = scanner.nextLine();
+                        try {
+                            Cliente nuevoCliente = new Cliente(idActualizar, clienteActualizar.getNombre(), nuevoCorreo, clienteActualizar.getPuntos());
+                            repo.actualizar(idActualizar, nuevoCliente);
+                        } catch (Exception e) {
+                            System.out.println("Error al actualizar el correo: " + e.getMessage());
+                        }
+                        break;
+                    case "4":
+                        System.out.print("Puntos a sumar: ");
+                        int puntosASumar = Integer.parseInt(scanner.nextLine());
+                        // clienteActualizar.sumarPuntos(puntosASumar);
+                        break;
+                    default:
+                        System.out.println("Opción inválida.");
+                }
 
             default:
                 System.out.println("Opción inválida.");
