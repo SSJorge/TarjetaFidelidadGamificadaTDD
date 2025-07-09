@@ -22,6 +22,28 @@ public class CompraRepositoryTest {
     void setUp() {
         repo = new CompraRepository();
     }
+    //OBTENER
+    @Test
+    void getCompra_existente_devuelveCompra() {
+        Compra compra = new Compra("CP001", "CL001", 100.0, LocalDate.of(2023, 10, 1));
+        repo.agregar(compra);
+
+        Compra encontrada = repo.getCompra("CP001");
+
+        assertNotNull(encontrada);
+        assertEquals("CP001", encontrada.getIdCompra());
+        assertEquals("CL001", encontrada.getIdCliente());
+        assertEquals(100.0, encontrada.getMonto());
+    }
+
+    @Test
+    void getCompra_noExistente_lanzaExcepcion() {
+        Exception ex = assertThrows(NoSuchElementException.class, () -> {
+            repo.getCompra("INEXISTENTE");
+        });
+
+        assertEquals("Compra no encontrada: INEXISTENTE", ex.getMessage());
+    }
 
     //AGREGAR
     @Test

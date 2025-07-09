@@ -21,6 +21,12 @@ public class CompraRepository {
 
     compras.add(compra);
 }
+    public Compra getCompra(String idCompra) {
+        return compras.stream()
+            .filter(c -> c.getIdCompra().equals(idCompra))
+            .findFirst()
+            .orElseThrow(() -> new NoSuchElementException("Compra no encontrada: " + idCompra));
+    }
     public List<Compra> listar() {
         return new ArrayList<>(compras);
     }
