@@ -189,9 +189,6 @@ public class App {
                         System.out.println(opcion2);
                         System.out.println("Opción inválida.");
                 }
-
-            // default:
-            //     System.out.println("Opción inválidaaa.");
         }
     }
      private static void mostrarPuntos(Scanner scanner, ClienteRepository repo) {
