@@ -20,7 +20,6 @@ public class App {
         FidelidadService servicio = new FidelidadService(clienteRepo, compraRepo);
         System.out.println("Hola, bienvenido al sistema de fidelización de clientes!");
         boolean continuar = true;
-        // Scanner scanner = new Scanner(System.in);
 
         while (continuar) {
             System.out.println("\n--- Menú Principal ---");
